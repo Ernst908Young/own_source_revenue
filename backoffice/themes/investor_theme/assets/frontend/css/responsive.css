@@ -1,0 +1,103 @@
+@media screen and (max-width:1001px){.vivah-link-wrap ul, .vivah-nav-style-2 .vivah-link-wrap ul{margin:-21px 25px;}
+.vivah-started-style-2{padding:9em 0 0;}
+}
+@media screen and (max-width:1024px){#vivah-offcanvass{display:block !important;background:#c81059;-webkit-backface-visibility:hidden;}
+.vivah-nav-toggle{display:block;}
+.vivah-nav-style-1 .vivah-link-wrap, .vivah-nav-style-2 .vivah-link-wrap{display:none;}
+.vivah-started-style-2{padding:9em 0 0;}
+.vivah-cover.o_p{height:400px !important;}
+.vivah-cover.o_p .vivah-cover-text .full-height{height:450px;margin-top:0px;}
+}
+@media screen and (max-width:980px){#vivah-offcanvass{display:block !important;background:#c81059;-webkit-backface-visibility:hidden;}
+.vivah-cover{min-height:481px !important;height:600px !important;}
+.vivah-cover .vivah-cover-text .full-height{min-height:587px;margin-top:0;height:650px !important;}
+.vivah-cover .vivah-cover-text .cover-text-lead{font-size:40px;}
+.vivah-cover .vivah-cover-text .full-height .vivah-cover-intro{min-height:468px;height:600px !important;}
+.vivah-cover.o_p{height:210px !important;}
+.vivah-cover.o_p .vivah-cover-text .full-height{height:210px;margin-top:0px;}
+.vivah-started-style-2{padding:9em 0 0;}
+.vivah-features-style-2 .vivah-feature .vivah-icon{margin-right:5px;}
+}
+@media screen and (max-width:769px){.vivah-cover.o_p{height:350px !important;min-height:220px !important;background-repeat:no-repeat;background-color:#1e131e;}
+.vivah-cover.o_p .vivah-cover-text .full-height{height:210px !important;margin-top:0px;}
+.vivah-cover.o_p .vivah-cover-text .full-height .vivah-cover-intro{height:412px !important;}
+}
+@media screen and (max-width:640px){.vivah-features-style-2 .vivah-feature .vivah-icon{margin-right:5px;}
+.vivah-cover{min-height:481px !important;}
+.vivah-cover .vivah-cover-text .full-height{min-height:587px;margin-top:0;}
+.vivah-cover .vivah-cover-text .cover-text-lead{font-size:40px;}
+.vivah-cover .vivah-cover-text .full-height .vivah-cover-intro{min-height:468px;}
+.vivah-nav-style-1 .vivah-logo, .vivah-nav-style-2 .vivah-logo{text-align:left;}
+.vivah-cover.o_p{height:330px !important;min-height:330px !important;}
+.vivah-cover.o_p .vivah-cover-text .full-height{height:270px;margin-top:0px;}
+.vivah-started-style-2{padding:9em 0 0;}
+.tabone a{width:100%;}
+}
+@media screen and (max-width:540px){.vivah-logo a img{width:320px;}
+.vivah-nav-style-1 .top-menu{background:transparent;border-bottom:none;}
+.vivah-cover{min-height:481px !important;}
+.vivah-cover .vivah-cover-text .full-height{min-height:587px;margin-top:0;}
+.vivah-cover .vivah-cover-text .cover-text-lead{font-size:40px;}
+.vivah-cover .vivah-cover-text .full-height .vivah-cover-intro{min-height:468px;}
+.vivah-nav-style-1 .vivah-logo, .vivah-nav-style-2 .vivah-logo{text-align:left;}
+.vivah-cover.o_p{height:350px !important;background-size:contain;background-repeat:no-repeat;background-color:#1e131e;}
+.vivah-cover.o_p .vivah-cover-text .full-height{height:210px !important;margin-top:0px;}
+.vivah-cover.o_p .vivah-cover-text .full-height .vivah-cover-intro{height:412px !important;}
+.vivah-started-style-2{padding:9em 0 0;}
+.tabone a{width:100%;}
+}
+@media screen and (max-width:480px){.vivah-logo a img{width:320px;}
+.vivah-nav-style-1 .top-menu{background:transparent;border-bottom:none;}
+.vivah-cover{min-height:481px !important;}
+.vivah-cover .vivah-cover-text .full-height{min-height:593px;margin-top:0;}
+.vivah-cover .vivah-cover-text .cover-text-lead{font-size:40px;}
+.vivah-cover .vivah-cover-text .full-height .vivah-cover-intro{min-height:468px;}
+.vivah-nav-style-1 .vivah-logo, .vivah-nav-style-2 .vivah-logo{text-align:left;}
+.vivah-cover.o_p{height:350px !important;background-size:contain;background-repeat:no-repeat;background-color:#1e131e;}
+.vivah-cover.o_p .vivah-cover-text .full-height{height:210px !important;margin-top:0px;}
+.vivah-cover.o_p .vivah-cover-text .full-height .vivah-cover-intro{height:412px !important;}
+.vivah-started-style-2{padding:9em 0 0;}
+.tabone a{width:100%;}
+}
+@media screen and (max-width:412px){.vivah-logo a img{width:320px;}
+.vivah-nav-style-1 .top-menu{background:transparent;border-bottom:none;}
+.vivah-cover{min-height:481px !important;}
+.vivah-cover .vivah-cover-text .full-height{min-height:587px;margin-top:0;}
+.vivah-cover .vivah-cover-text .cover-text-lead{font-size:40px;}
+.vivah-cover .vivah-cover-text .full-height .vivah-cover-intro{min-height:468px;}
+.vivah-cover.o_p{height:350px !important;background-size:contain;background-repeat:no-repeat;background-color:#1e131e;}
+.vivah-cover.o_p .vivah-cover-text .full-height{height:210px !important;margin-top:0px;}
+.vivah-cover.o_p .vivah-cover-text .full-height .vivah-cover-intro{height:412px !important;}
+.vivah-started-style-2{padding:9em 0 0;}
+.tabone a{width:100%;}
+}
+@media screen and (max-width:360px){.vivah-logo a img{width:320px;}
+.vivah-nav-style-1 .top-menu{background:transparent;border-bottom:none;}
+.vivah-cover{min-height:481px !important;}
+.vivah-cover .vivah-cover-text .full-height{min-height:587px;margin-top:0;}
+.vivah-cover .vivah-cover-text .cover-text-lead{font-size:40px;}
+.vivah-cover .vivah-cover-text .full-height .vivah-cover-intro{min-height:468px;}
+.vivah-cover.o_p{height:320px !important;background-size:contain;background-repeat:no-repeat;background-color:#1e131e;}
+.vivah-cover.o_p .vivah-cover-text .full-height{height:210px !important;margin-top:0px;}
+.vivah-cover.o_p .vivah-cover-text .full-height .vivah-cover-intro{height:412px !important;}
+.vivah-started-style-2{padding:9em 0 0;}
+.tabone a{width:100%;}
+}
+@media screen and (max-width:320px){.vivah-nav-style-1, .vivah-nav-style-2{margin-top:20px;}
+.vivah-logo a img{width:320px;}
+.vivah-nav-style-1 .top-menu{background:transparent;border-bottom:none;}
+.vivah-cover{min-height:481px !important;}
+.vivah-cover .vivah-cover-text .full-height{min-height:587px;margin-top:0;}
+.vivah-cover .vivah-cover-text .cover-text-lead{font-size:40px;}
+.vivah-cover .vivah-cover-text .full-height .vivah-cover-intro{min-height:468px;}
+.form-control.btn-get{padding:0px 2px;}
+.vivah-features-style-2 .vivah-feature .vivah-icon{margin-right:5px;}
+.scroll-btn .mouse{margin:0 auto 0px;}
+.vivah-cover.o_p{height:350px !important;background-size:contain;background-repeat:no-repeat;background-color:#1e131e;}
+.vivah-cover.o_p .vivah-cover-text .full-height{height:250px !important;margin-top:0px;}
+.vivah-cover.o_p .vivah-cover-text .full-height .vivah-cover-intro{height:390px !important;}
+.vivah-started-style-2{padding:9em 0 0;}
+.tabone a{width:100%;}
+}
+.mview{display:none;}
+@media screen and (max-width: 1024px) {.mview{display:block;}}

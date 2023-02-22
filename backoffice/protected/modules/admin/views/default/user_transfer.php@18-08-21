@@ -1,0 +1,143 @@
+<style>
+.form-part .form-group > div.services {
+    max-width: 100%;
+    margin-bottom: 44px;
+}
+#div_error{text-align:center;}
+ul.dashboard-menu > li a {
+    padding: 0 15px 0 60px;
+}
+.flash-Error{color:red;}
+</style>
+<div class="dashboard-home">
+	<div class="applied-status">
+		<div class="status-title d-flex flex-wrap align-items-center justify-content-between">
+		    
+		</div>
+	</div>
+</div>
+	<div style="text-align:center;font-size:16px;color:green;">
+<?php
+	foreach(Yii::app()->user->getFlashes() as $key => $message) {
+		echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
+	}
+?>
+</div>
+<div id="div_error"></div>
+<div class="m-wizard__form reservation-form" style="padding: 17px 33px 0px;">
+<div class="m-wizard__form-step m-wizard__form-step--current" id="m_wizard_form_step_1">
+<form id="s_form" method="post" action="<?php echo Yii::app()->createAbsoluteUrl('admin/default/saveusertransfer')?>" enctype="multipart/form-data" >
+<div class="form-part bussiness-det">
+<?php
+
+		
+	
+		$connection=Yii::app()->db; 
+		$sql1="SELECT  bo_user.uid,bo_user.full_name,bo_user.middle_name,bo_user.last_name,bo_user.email from bo_user
+		where  
+		bo_user.is_active='1' and bo_user.system_user='N'";
+		
+		$command=$connection->createCommand($sql1);
+		$users = $command->queryAll();
+		
+		
+		?>
+
+				 	<div>								<h4 class="form-heading">
+							User Transfer				</h4>
+					</div>
+					<hr id="hr_UK-FCL-00150_0" style="height: 0px; margin: 0px;">
+					<div class="form-row row">
+			
+
+								
+				<div class="form-group col-md-12 user-div" >
+					
+					<label class="col-md-12 control-label text-left" >
+						 User <span style="color:red;">* </span>	</label>
+
+					<div class="col-md-12">
+					<select name="user_id" id="user_id">
+						<option value="">Select User</option>
+						<?php if(count($users)>0){
+								for($u=0;$u<count($users);$u++){
+									$name=$users[$u]['full_name'];
+									if($users[$u]['middle_name']!="")
+										$name.=' '.$users[$u]['middle_name'];
+									$name.=' '.$users[$u]['last_name'];
+									
+									$name.= ' - '.$users[$u]['email'];
+									?>
+									<option value="<?php echo $users[$u]['uid'];?>"><?php echo $name;?></option>
+									<?php
+								}
+							}?>
+					</select>
+					</div>
+				</div>
+
+					<div class="form-group col-md-12 user-div" >
+					
+					<label class="col-md-12 control-label text-left" >
+						New User <span style="color:red;">* </span>	</label>
+
+					<div class="col-md-12">
+					<select name="new_user_id" id="new_user_id">
+						<option value="">Select User</option>
+						<?php if(count($users)>0){
+								for($u=0;$u<count($users);$u++){
+									$name=$users[$u]['full_name'];
+									if($users[$u]['middle_name']!="")
+										$name.=' '.$users[$u]['middle_name'];
+									$name.=' '.$users[$u]['last_name'];
+									
+									$name.= ' - '.$users[$u]['email'];
+									?>
+									<option value="<?php echo $users[$u]['uid'];?>"><?php echo $name;?></option>
+									<?php
+								}
+							}?>
+					</select>
+					</div>
+				</div>
+				
+				
+		
+
+				
+			
+				<div class="col-md-12 mb-3">
+					  <input type="submit" class="btn btn-primary " value="Update" name="transfer_user" id="transfer_user">
+					
+				</div>
+			</div>
+</div>
+</form>
+
+
+
+
+              </div>
+			  
+			  
+	
+</div>	
+<?php
+
+   $base=Yii::app()->theme->baseUrl;
+
+?>
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<link rel="stylesheet" href="<?=$base?>/assets/frontend/dashboard/css/plugins/select2/select2.css">
+
+<script src="<?=$base?>/assets/frontend/dashboard/js/plugins/select2/select2.min.js"></script>
+<!--<link href="<?=$base?>/css/main-style.css" rel="stylesheet">	-->	
+ <script>	
+$(document).ready(function(){
+				  $("#new_user_id").select2();  
+				  $("#user_id").select2();  
+});
+
+ </script>
+			

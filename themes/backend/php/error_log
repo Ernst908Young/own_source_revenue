@@ -1,0 +1,4 @@
+[03-Sep-2015 06:06:57] PHP Parse error:  syntax error, unexpected T_ECHO, expecting T_FUNCTION in /home2/jlabs/public_html/clients/SWCS/frontoffice/themes/backend/php/connector.php on line 29
+[03-Sep-2015 06:07:16] PHP Parse error:  syntax error, unexpected T_ECHO, expecting T_FUNCTION in /home2/jlabs/public_html/clients/SWCS/frontoffice/themes/backend/php/connector.php on line 29
+[03-Sep-2015 06:08:04] PHP Parse error:  syntax error, unexpected T_ECHO, expecting T_FUNCTION in /home2/jlabs/public_html/clients/SWCS/frontoffice/themes/backend/php/connector.php on line 29
+[03-Sep-2015 06:22:22] PHP Parse error:  syntax error, unexpected T_ECHO, expecting T_FUNCTION in /home2/jlabs/public_html/clients/SWCS/frontoffice/themes/backend/php/connector.php on line 30

@@ -1,0 +1,709 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title></title>
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="<?php echo Configure::read('SITEPATH'); ?>/frontend/css/animate.css">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/css/bootstrap.min.css">
+	<!-- jQuery UI -->
+	<link rel="stylesheet" href="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/css/plugins/jquery-ui/jquery-ui.min.css">
+	<!-- Theme CSS -->
+	<link rel="stylesheet" href="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/css/style.css">
+	<!-- Color CSS -->
+	<link rel="stylesheet" href="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/css/themes.css">
+	<!-- colorbox -->
+	<link rel="stylesheet" href="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/css/plugins/colorbox/colorbox.css">
+	
+	<link rel="stylesheet" href="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/css/account.css">
+	<link rel="stylesheet" href="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/css/component.css">
+	<link rel="stylesheet" href="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/css/circle.css">
+	<link rel="stylesheet" href="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/css/vivahsuabhagya.css">
+	<link rel="stylesheet" href="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/css/responsive.css">
+	<link href="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/css/effects.min.css" rel="stylesheet"> 
+	
+	<!-- jQuery -->
+	<script src="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/js/jquery.min.js"></script>
+
+	<!-- Nice Scroll -->
+	<script src="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
+	<!-- imagesLoaded -->
+	<script src="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/js/plugins/imagesLoaded/jquery.imagesloaded.min.js"></script>
+	<!-- jQuery UI -->
+	<script src="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/js/plugins/jquery-ui/jquery-ui.js"></script>
+	<!-- slimScroll -->
+	<script src="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/js/bootstrap.min.js"></script>
+	<!-- Bootbox -->
+	<script src="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/js/plugins/bootbox/jquery.bootbox.js"></script>
+	<!-- Bootbox -->
+	<script src="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/js/plugins/form/jquery.form.min.js"></script>
+	<!-- Validation -->
+	<script src="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/js/plugins/validation/jquery.validate.min.js"></script>
+	<script src="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/js/plugins/validation/additional-methods.min.js"></script>
+	<!-- colorbox -->
+	<script src="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/js/plugins/colorbox/jquery.colorbox-min.js"></script>
+	
+	<!-- WOW -->
+	<script src="<?php echo Configure::read('SITEPATH'); ?>/frontend/js/wow.min.js"></script>
+	<script>
+		new WOW().init();
+	</script>
+
+	<!-- Theme framework -->
+	<script src="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/js/eakroko.min.js"></script>
+	<!-- Theme scripts -->
+	<script src="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/js/application.min.js"></script>
+	<!-- Just for demonstration -->
+	<script src="<?php echo Configure::read('SITEPATH'); ?>/frontend/dashboard/js/demonstration.min.js"></script>
+	
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="<?php echo Configure::read("SITEPATH"); ?>/frontend/images/vsfavicon1.png" />
+<style>
+#content.nav-fixed {
+    padding-top: 20px; padding-bottom: 30px;
+    height: auto !important;
+}
+</style>
+</head>
+
+<body data-layout-topbar="fixed">
+<div id="wrapper">
+	<div id="navigation">
+		<div class="container">
+			<a href="#" id="brand">&nbsp;</a>
+			<!--<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation">
+				<i class="fa fa-bars"></i>
+			</a>-->
+			<ul class='main-nav'>
+				<li class="dropdown">
+					<a href="#" data-toggle="dropdown" class='dropdown-toggle'>
+						<span>Profile</span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#">Help Desk</a>
+						</li>
+						<li>
+							<a href="#">My Request</a>
+						</li>
+						<li>
+							<a href="#">Validation</a>
+						</li>
+						<li>
+							<a href="#">Wizard</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#"><span>Matches <span class="label label-lightred">4</span></span></a>
+				</li>
+				<li>
+					<a href="#"><span class="newicon"><i class="fa fa-bell"></i></span>Search </a>
+				</li>
+				<li>
+					<a href="#"><span>Inbox <span class="label label-lightred">4</span></span></a>
+				</li>
+				<li class="dropdown">
+					<a href="#" data-toggle="dropdown" class='dropdown-toggle'>
+						<span class="newicon"><i class="fa fa-bell"></i></span> Help
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#">Help Desk</a>
+						</li>
+						<li>
+							<a href="#">My Request</a>
+						</li>
+						<li>
+							<a href="#">Validation</a>
+						</li>
+						<li>
+							<a href="#">Wizard</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div class="user">
+				<div class="dropdown">
+					<a href="#" class='dropdown-toggle' data-toggle="dropdown">Hi! Username
+					<img src="<?php echo Configure::read("SITEPATH"); ?>/frontend/dashboard/img/demo/user-avatar.jpg" class="user-img img-circle" alt="">
+					</a>
+					<ul class="dropdown-menu user-d pull-right">
+							<li>
+								<div class="user-d-no-ph">
+                                    <div class="user-d-no-ph-title"><span class="glyphicon glyphicon-info-sign"></span>Photo Upload Pending</div>
+                                    <div class="pup_btn_wrap">
+										<form name="" id="" method="post">
+												<input type="file" name="file-1[]" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple="">
+												<label for="file-1"><svg width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg> <span>Upload Photo</span></label>											
+										</form>
+									</div>
+									<div class="small">You can keep your Photos private.</div>
+								</div>
+							</li>
+							<li>
+								<div class="navbar-profile pro-drop">
+									<div class="row">
+										<div class="col-lg-6">
+											<ul>
+												<li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>My Profile</a></li>
+												<li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i>Account Settings</a></li>
+											</ul>
+										</div>
+										<div class="col-lg-6">
+											<ul>
+												<li><a href="#"><i class="fa fa-filter" aria-hidden="true"></i>Contact Filters</a></li>
+												<li><a href="#"><i class="fa fa-lock" aria-hidden="true"></i>Privacy Option</a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="logout">
+										<a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+									</div>
+								</div>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<div class="navbar-profile navbar-profile-session">
+									<div class="row">
+										<div class="col-lg-12">
+											<p>
+												<span>Account Type:Free</span><br>
+												<button class="btn btn-satgreen" type="button">Upgrade Now</button>											</p>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="jumbotron header-bg-about" id="overlay">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-push-2 col-md-8 col-sm-12 col-xs-12 full-height">
+						<div class="vivah-cover-intro" align="center">
+							<h5 class="cover-text-lead wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.5s; animation-name: fadeInUp;">About Us</h5><br>
+							<p style="font-size:14px;"> We help people find happiness.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="clearfix">&nbsp;</div>
+	<div class="clearfix">&nbsp;</div>
+	
+	<div class="container" id="content">
+		<div id="main">
+			<section class="text-md-left">
+				<div class="shell bg-02">
+					<h2>We are a leading Indian matrimonial 
+						<span class="reveal-block big text-italic">
+							<span class="text-gray">matchmaking </span>
+							<span class="text-primary">service provider!</span>
+						</span>
+					</h2>
+					<div class="range">
+						<div class="col-md-10 col-lg-9">
+							<p>
+								Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness. Tore than a decade. By redefining the way Indian brides and grooms meet for marriage, Vivahsaubhagya.com has created a world-renowned service that has touched over 35 million people. We wish a happy marriage life to all our member.							
+							</p>
+						</div>
+					</div>
+
+					<div class="range">
+						<div class="col-md-6">
+							<blockquote>
+								<p>
+									Lorem ipsum velit ullamco anim pariatur proident eu deserunt laborum. Lorem ipsum ad in nostrud adipisicing cupidatat anim officia ad id cupidatat veniam quis elit ullamco Excepteur ullamco.Lorem ipsum ad in nostrud adipisicing cupidatat anim officia ad id cupidatat veniam quis elit ullamco Excepteur ullamco.
+								</p>
+							</blockquote>
+						</div>
+						<div class="col-md-6 col-lg-4 veil reveal-md-block">
+							<h4 class="reveal-inline-block text-md-right text-bold">more<br class="veil reveal-md-inline-block"> than</h4>
+							<h1 class="reveal-inline-block text-spacing--50 f-50" style="font-size:80px;">285</h1>
+							<h4 class="reveal-inline-block text-bold">events</h4>
+							<div class="text-center">
+								<h4 class="reveal-inline-block text-top text-bold">since</h4>
+								<h2 class="reveal-inline-block text-spacing--50 text-height-93" style="font-size:80px;line-height: 0;">2000</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	
+	<div id="about-bg-1">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-push-2 col-md-8 col-sm-12 col-xs-12 full-height">
+					<div class="vivah-cover-intro" align="center">
+						<h5 class="cover-text-lead wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.5s; animation-name: fadeInUp;">Why Vivahsaubhagya?</h5>	
+						<div class="wedd-seperator-1 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.8s; animation-name: fadeInUp;">
+							<img src="<?php echo Configure::read("SITEPATH"); ?>/frontend/images/saprator2.png" alt="">
+						</div>						
+						<p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.8s; animation-name: fadeInUp;">Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness.</p>
+					</div>
+				</div>
+				<div class="vivah-about-features">
+					<div class="vivah-about-feature wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.8s; animation-name: fadeInUp;">
+						<div class="icon"><i class="fa fa-heart"></i></div>
+						<h3>Best matches </h3>
+						<p>Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness.</p>
+					</div>
+					<div class="vivah-about-feature wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.1s" style="visibility: visible; animation-duration: 1s; animation-delay: 1.1s; animation-name: fadeInUp;">
+						<div class="icon"><i class="fa fa-adjust"></i></div>
+						<h3>Max Responses</h3>
+						<p>Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness.</p>
+					</div>
+					<div class="vivah-about-feature wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s" style="visibility: visible; animation-duration: 1s; animation-delay: 1.4s; animation-name: fadeInUp;">
+						<div class="icon"><i class=" fa fa-square-o"></i></div>
+						<h3>Verified Contact</h3>
+						<p>Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness.</p>
+					</div>
+					<div class="vivah-about-feature wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.7s" style="visibility: visible; animation-duration: 1s; animation-delay: 1.7s; animation-name: fadeInUp;">
+						<div class="icon"><i class="fa fa-check-circle-o"></i></div>
+						<h3>Verified Email </h3>
+						<p>Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness.</p>
+					</div>
+					<div class="vivah-about-feature wow fadeInUp" data-wow-duration="1s" data-wow-delay="2s" style="visibility: visible; animation-duration: 1s; animation-delay: 2s; animation-name: fadeInUp;">
+						<div class="icon"><i class="fa fa-key"></i></div>
+						<h3>100% privacy</h3>
+						<p>Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness.</p>
+					</div>
+					<div class="vivah-about-feature wow fadeInUp" data-wow-duration="1s" data-wow-delay="2.3s" style="visibility: visible; animation-duration: 1s; animation-delay: 2.3s; animation-name: fadeInUp;">
+						<div class="icon"><i class="fa fa-money"></i></div>
+						<h3>secure Payment</h3>
+						<p>Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness.</p>
+					</div>
+				</div>
+			</div>
+		</div> 
+	</div>
+	
+	
+	<section class="focus" id="focus">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-push-2 col-md-8 col-sm-12 col-xs-12 full-height">
+					<div class="vivah-cover-intro" align="center">
+						<h5 class="cover-text-lead-1 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.5s; animation-name: fadeInUp;">Meet The Team Behind Vivahsaubhagya Greatness</h5>	
+						<div class="wedd-seperator-1 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.8s; animation-name: fadeInUp;">
+							<img src="<?php echo Configure::read("SITEPATH"); ?>/frontend/images/saprator1.png" alt="">
+						</div>						
+						<p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.8s; animation-name: fadeInUp;">Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="team__body"> 
+					<ul class="accordion-team"> 
+						<li class="team__member team__tile-content"> 
+							<h2>Leadership</h2> 
+							<p>Click each bio to expand and learn more</p> 
+						</li> 
+						<li class="team__member"> 
+							<a href="javascript:void(0)" class="js-accordion-trigger"> 
+								<img src="<?php echo Configure::read("SITEPATH"); ?>/frontend/dashboard/img/team1.png" alt=""> 
+								<span class="team__overlay"> 
+									<div class="name-wrapper"> 
+										<span itemprop="founder" class="name">ROHAN MISHRA</span>
+										<span class="title">CEO and Co-Founder</span> 
+									</div> 
+								</span> 
+							</a> 
+							<ul class="submenu team-second-column jason" style="display: none;"> 
+								<li> 
+									<div class="close"><a>Close</a></div> 
+									<h3>ROHAN MISHRA</h3> 
+									<h4>CEO and Co-Founder</h4> 
+									<p>Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness.</p> 
+								</li> 
+							</ul> 
+						</li>
+						<li class="team__member"> 
+							<a href="javascript:void(0)" class="js-accordion-trigger"> 
+								<img src="<?php echo Configure::read("SITEPATH"); ?>/frontend/dashboard/img/team1.png" alt=""> 
+								<span class="team__overlay"> 
+									<div class="name-wrapper"> 
+										<span itemprop="founder" class="name">ROHAN MISHRA</span>
+										<span class="title">CEO and Co-Founder</span> 
+									</div> 
+								</span> 
+							</a> 
+							<ul class="submenu team-third-column jason" style="display: none;"> 
+								<li> 
+									<div class="close"><a>Close</a></div> 
+									<h3>ROHAN MISHRA</h3> 
+									<h4>CEO and Co-Founder</h4> 
+									<p>Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness.</p> 
+								</li> 
+							</ul> 
+						</li>
+						
+						<li class="team__member"> 
+							<a href="javascript:void(0)" class="js-accordion-trigger"> 
+								<img src="<?php echo Configure::read("SITEPATH"); ?>/frontend/dashboard/img/team1.png" alt=""> 
+								<span class="team__overlay"> 
+									<div class="name-wrapper"> 
+										<span itemprop="founder" class="name">ROHAN MISHRA</span>
+										<span class="title">CEO and Co-Founder</span> 
+									</div> 
+								</span> 
+							</a> 
+							<ul class="submenu team-fourth-column jason" style="display: none;"> 
+								<li> 
+									<div class="close"><a>Close</a></div> 
+									<h3>ROHAN MISHRA</h3> 
+									<h4>CEO and Co-Founder</h4> 
+									<p>Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness.</p> 
+								</li> 
+							</ul> 
+						</li>
+					
+					<li class="team__member"> 
+							<a href="javascript:void(0)" class="js-accordion-trigger"> 
+								<img src="<?php echo Configure::read("SITEPATH"); ?>/frontend/dashboard/img/team1.png" alt=""> 
+								<span class="team__overlay"> 
+									<div class="name-wrapper"> 
+										<span itemprop="founder" class="name">ROHAN MISHRA</span>
+										<span class="title">CEO and Co-Founder</span> 
+									</div> 
+								</span> 
+							</a> 
+							<ul class="submenu team-first-column jason" style="display: none;"> 
+								<li> 
+									<div class="close"><a>Close</a></div> 
+									<h3>ROHAN MISHRA</h3> 
+									<h4>CEO and Co-Founder</h4> 
+									<p>Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness.</p> 
+								</li> 
+							</ul> 
+						</li>
+					
+					<li class="team__member"> 
+							<a href="javascript:void(0)" class="js-accordion-trigger"> 
+								<img src="<?php echo Configure::read("SITEPATH"); ?>/frontend/dashboard/img/team1.png" alt=""> 
+								<span class="team__overlay"> 
+									<div class="name-wrapper"> 
+										<span itemprop="founder" class="name">ROHAN MISHRA</span>
+										<span class="title">CEO and Co-Founder</span> 
+									</div> 
+								</span> 
+							</a> 
+							<ul class="submenu team-second-column jason" style="display: none;"> 
+								<li> 
+									<div class="close"><a>Close</a></div> 
+									<h3>ROHAN MISHRA</h3> 
+									<h4>CEO and Co-Founder</h4> 
+									<p>Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness.</p> 
+								</li> 
+							</ul> 
+						</li>
+					
+					<li class="team__member"> 
+							<a href="javascript:void(0)" class="js-accordion-trigger"> 
+								<img src="<?php echo Configure::read("SITEPATH"); ?>/frontend/dashboard/img/team1.png" alt=""> 
+								<span class="team__overlay"> 
+									<div class="name-wrapper"> 
+										<span itemprop="founder" class="name">ROHAN MISHRA</span>
+										<span class="title">CEO and Co-Founder</span> 
+									</div> 
+								</span> 
+							</a> 
+							<ul class="submenu team-third-column jason" style="display: none;"> 
+								<li> 
+									<div class="close"><a>Close</a></div> 
+									<h3>ROHAN MISHRA</h3> 
+									<h4>CEO and Co-Founder</h4> 
+									<p>Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness.</p> 
+								</li> 
+							</ul> 
+						</li>
+					
+					<li class="team__member"> 
+							<a href="javascript:void(0)" class="js-accordion-trigger"> 
+								<img src="<?php echo Configure::read("SITEPATH"); ?>/frontend/dashboard/img/team1.png" alt=""> 
+								<span class="team__overlay"> 
+									<div class="name-wrapper"> 
+										<span itemprop="founder" class="name">ROHAN MISHRA</span>
+										<span class="title">CEO and Co-Founder</span> 
+									</div> 
+								</span> 
+							</a> 
+							<ul class="submenu team-fourth-column jason" style="display: none;"> 
+								<li> 
+									<div class="close"><a>Close</a></div> 
+									<h3>ROHAN MISHRA</h3> 
+									<h4>CEO and Co-Founder</h4> 
+									<p>Vivahsaubhagya.com, one of India's best known brands and the world's largest matrimonial service was founded with a simple objective - to help people find happiness.</p> 
+								</li> 
+							</ul> 
+						</li>
+					
+					</ul> 
+				</div>
+			</div>
+		</div> <!-- / END CONTAINER -->
+	</section>
+	
+	<section id="success-story">
+		<div class="container">
+			<!-- SECTION HEADER -->
+			<div class="section-header">
+				<!-- SECTION TITLE -->
+				<h2 class="dark-text wow fadeInUp" data-wow-duration="1s" data-wow-delay=".2s">Success Stories</h2>
+				<div class="section-legend wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s" style="color:#fff;">
+					Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.
+				</div>
+			</div>
+			<div class="carousel slide" id="myCarousel">
+				<div class="carousel-inner">
+					<div class="item active">
+						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">				
+							<div class="hover ehover1">
+								<img class="img-responsive" src="<?php echo Configure::read("SITEPATH"); ?>/frontend/images/couple1.jpg" alt="">
+								<div class="overlay">
+									<h2>Mityha Weds Vishal</h2>
+									<p>By redefining the way Indian brides and grooms meet for marriage, Vivahsaubhagya.com has created a world-renowned service that has touched over 35 million people.</p>
+									<button class="info">Read More</button>
+								</div>				
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">				
+							<div class="hover ehover1">
+								<img class="img-responsive" src="<?php echo Configure::read("SITEPATH"); ?>/frontend/images/couple2.jpg" alt="">
+								<div class="overlay">
+									<h2>Kavita weds Vishal</h2>
+									<p>By redefining the way Indian brides and grooms meet for marriage, Vivahsaubhagya.com has created a world-renowned service that has touched over 35 million people.</p>
+									<button class="info">Read More</button>
+								</div>				
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">				
+							<div class="hover ehover1">
+								<img class="img-responsive" src="<?php echo Configure::read("SITEPATH"); ?>/frontend/images/couple3.jpg" alt="">
+								<div class="overlay">
+									<h2>Maithili Weds Ashish</h2>
+									<p>By redefining the way Indian brides and grooms meet for marriage, Vivahsaubhagya.com has created a world-renowned service that has touched over 35 million people.</p>
+									<button class="info">Read More</button>
+								</div>				
+							</div>
+						</div>
+					</div><!-- /Slide1 --> 
+					<div class="item">
+						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">				
+							<div class="hover ehover1">
+								<img class="img-responsive" src="<?php echo Configure::read("SITEPATH"); ?>/frontend/images/couple1.jpg" alt="">
+								<div class="overlay">
+									<h2>Mityha Weds Vishal</h2>
+									<p>By redefining the way Indian brides and grooms meet for marriage, Vivahsaubhagya.com has created a world-renowned service that has touched over 35 million people.</p>
+									<button class="info">Read More</button>
+								</div>				
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">				
+							<div class="hover ehover1">
+								<img class="img-responsive" src="<?php echo Configure::read("SITEPATH"); ?>/frontend/images/couple2.jpg" alt="">
+								<div class="overlay">
+									<h2>Kavita weds Vishal</h2>
+									<p>By redefining the way Indian brides and grooms meet for marriage, Vivahsaubhagya.com has created a world-renowned service that has touched over 35 million people.</p>
+									<button class="info">Read More</button>
+								</div>				
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">				
+							<div class="hover ehover1">
+								<img class="img-responsive" src="<?php echo Configure::read("SITEPATH"); ?>/frontend/images/couple3.jpg" alt="">
+								<div class="overlay">
+									<h2>Maithili Weds Ashish</h2>
+									<p>By redefining the way Indian brides and grooms meet for marriage, Vivahsaubhagya.com has created a world-renowned service that has touched over 35 million people.</p>
+									<button class="info">Read More</button>
+								</div>				
+							</div>
+						</div>
+					</div><!-- /Slide1 --> 
+				</div>
+				<nav style="margin:20px 0;">
+					<ul class="control-box pager" style="margin:8px 0">
+						<li><a data-slide="prev" href="#myCarousel"><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+						<li><a data-slide="next" href="#myCarousel"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+					</ul>
+				</nav>
+				<!-- /.control-box -->   
+			</div><!-- /#myCarousel -->
+			</div>
+	</section>
+	
+	<!-- DIRECT CHAT PRIMARY -->
+	<div class="support-chat-box box chat-window box-primary direct-chat direct-chat-primary" id="qnimate">
+		<div class="box-header with-border">
+		  <h3 class="box-title">Live Chat</h3>
+	
+		  <div class="box-tools pull-right">
+			<a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-comment icon_minim"></span></a>
+		  </div>
+		</div>
+		<!-- /.box-header -->
+		<div class="chat-collapse" style="display:none;">
+		<div class="box-body">					
+		  <!-- Conversations are loaded here -->
+			<div class="direct-chat-messages">
+				<!--<div class="media">
+					We can't wait to talk to you. But first, please take a couple of moments to tell us a bit about yourself.
+				</div>-->
+				<!-- Message. Default to the left -->
+				<div class="direct-chat-msg">
+					<div class="direct-chat-info clearfix">
+						<span class="direct-chat-name pull-left">Alexander Pierce</span>
+						<span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+					</div>
+					<!-- /.direct-chat-info -->
+					<img class="direct-chat-img" src="http://bootdey.com/img/Content/user_1.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
+					<div class="direct-chat-text">
+						Is this really for free? That's unbelievable!
+					</div>
+					<!-- /.direct-chat-text -->
+				</div>
+				<!-- /.direct-chat-msg -->
+	
+				<!-- Message to the right -->
+				<div class="direct-chat-msg right">
+					<div class="direct-chat-info clearfix">
+						<span class="direct-chat-name pull-right">Sarah Bullock</span>
+						<span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+					</div>
+					<!-- /.direct-chat-info -->
+					<img class="direct-chat-img" src="http://bootdey.com/img/Content/user_2.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
+					<div class="direct-chat-text">
+						You better believe it!
+					</div>
+					<!-- /.direct-chat-text -->
+				</div>
+				<!-- /.direct-chat-msg -->
+			</div>
+			<!--/.direct-chat-messages-->
+		  <!-- /.direct-chat-pane -->
+		</div>
+		<!-- /.box-body -->
+		<div class="box-footer">
+			<div class="input-group">
+				<input id="btn-input" type="text" class="form-control input-sm chat_input" placeholder="Write your message here..." />
+				<span class="input-group-btn">
+				<button class="btn btn-primary btn-sm" id="btn-chat">Send</button>
+				</span>
+			</div>
+		</div>
+	</div>
+		<!-- /.box-footer-->
+	</div>
+	<!--/.direct-chat -->
+
+	<div class="vivah-footer-style-3">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-sm-6 vivah-footer-widget wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">
+					<div class="vivah-logo"><span class="logo"><img src="<?php echo Configure::read("SITEPATH"); ?>/frontend/images/vsfavicon1.png"></span> Vivah Saubhagya</div>
+					<p class="vivah-copyright">&copy; 2016 Vivah Saubhagya. <br>All Rights Reserved.</p>
+				</div>
+				<div class="col-md-3 col-sm-6 vivah-footer-widget wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">
+					<h3>Help & Support</h3>
+					<ul class="vivah-links">
+						<li><a href="#">Contact Us</a></li>
+						<li><a href="#">Faq's</a></li>
+						<li><a href="#">Security Tips</a></li>
+					</ul>
+				</div>
+				<div class="clearfix visible-sm-block"></div>
+				<div class="col-md-3 col-sm-6 vivah-footer-widget wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">
+					<h3>Other Links</h3>
+					<ul class="vivah-links">
+						<li><a href="#">Services</a></li>
+						<li><a href="#">Hasthrekha</a></li>
+						<li><a href="#">Horoscope</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 col-sm-6 vivah-footer-widget wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.1s">
+					<h3>Connect</h3>
+					<ul class="vivah-links vivah-social">
+						<li><a href="#"><i class="icon icon-facebook2"></i> Facebook</a></li>
+						<li><a href="#"><i class="icon icon-twitter"></i> Twitter</a></li>
+						<li><a href="#"><i class="icon icon-instagram"></i> Instagram</a></li>
+					</ul>
+				</div>
+			
+				<div class="clearfix visible-sm-block"></div>
+			</div>
+			<div class="row vivah-made">
+				<div class="col-md-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">
+					<p>You can send Photograph & Biodata on <i class="heart icon-phone"></i> +91-9044331849 </p>
+				</div>
+			</div>
+		</div>
+</div>
+	<!-- END footer -->
+		
+	<script>
+  $(function(){
+	$(".addClass").click(function () {
+    $('#qnimate').addClass('support-chat-box-on');
+    });
+          
+    $(".removeClass").click(function () {
+    $('#qnimate').removeClass('support-chat-box-on');
+    });
+	
+	//
+$(document).on('click', '.box-header span.icon_minim', function (e) {
+    var $this = $(this);
+    if (!$this.hasClass('support-chat-box-collapsed')) {
+        $this.parents('.support-chat-box').find('.chat-collapse').slideDown();
+        $this.addClass('support-chat-box-collapsed');
+        $this.removeClass('glyphicon-comment').addClass('glyphicon-minus');
+    } else {
+        $this.parents('.support-chat-box').find('.chat-collapse').slideUp();
+        $this.removeClass('support-chat-box-collapsed');
+        $this.removeClass('glyphicon-minus').addClass('glyphicon-comment');
+    }
+});
+$(document).on('focus', '.box-footer input.chat_input', function (e) {
+    var $this = $(this);
+    if ($('#minim_chat_window').hasClass('popup-box-collapsed')) {
+        $this.parents('.support-chat-box').find('.chat-collapse').slideDown();
+        $('#minim_chat_window').removeClass('support-chat-box-collapsed');
+        $('#minim_chat_window').removeClass('glyphicon-comments').addClass('glyphicon-minus');
+    }
+});
+
+
+
+//
+$(".js-accordion-trigger").bind("click",function(t){$(this).closest(".team__member").siblings().find("a").removeClass("is-expanded").next(".submenu").slideUp(250),$(this).toggleClass("is-expanded").next("ul").slideToggle(250),t.preventDefault(),$(".close")
+.click(function(){$(".js-accordion-trigger").removeClass("is-expanded").next(".submenu").slideUp(250)})}),
+	
+$(".js-accordion-trigger").click(function () {
+    $header = $(this);
+    //getting the next element
+    $submenu = $(this).next();
+    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+});	
+
+  })
+</script>
+
+</div>
+</body>
+</html>

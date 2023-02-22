@@ -1,0 +1,8 @@
+   <li>
+            <a href="#">
+                <span class="list-icon">
+                    <img src="<?php echo $basePath; ?>/assets/applicant/images/dash-9.png">
+                      <img src="<?php echo $basePath; ?>/assets/applicant/images/report-white.png" class="whiteicon">
+                </span>Reports
+            </a>
+        </li>

@@ -1,0 +1,1647 @@
+<?php
+
+class DefaultController extends Controller {
+
+    public function actionDmsDashboard($page = 0) {
+        @session_start();
+        if (RolesExt::isDocumentVerifierUser()) {
+            // echo "==";die;
+            $year = '2016';
+            if (isset($_GET['year']))
+                $year = $_GET['year'];
+            $this->render('documentVerifierDashboardNew', array("selectedYear" => $year));
+            exit;
+        }
+    }
+
+    public function actionIndex($page = 0) {
+		ini_set('memory_limit', '-1');
+        @session_start();
+       //echo "<pre>";print_r($_SESSION);die;
+        if (isset($_SESSION['uid']) && !empty($_SESSION['uid'])) {
+            if (DefaultUtility::isSMSSender()) {
+                $this->redirect(array("/admin/sendSMS"));
+                exit;
+            }
+            if (RolesExt::isAdminUser()) {
+                $this->render('caipoDashboard');
+                exit;
+            }
+			
+			/*if (in_array($_SESSION['role_id'],array('87'))) {
+
+                $this->render('verifier_dashboard');
+                exit;
+            }
+
+			if (in_array($_SESSION['role_id'],array('88'))) {
+
+                $this->render('approver_dashboard');
+                exit;
+            }	*/
+			
+            if (in_array($_SESSION['role_id'],array('83'))) {
+
+                $this->render(Yii::app()->params['verifier_dashboard']);
+                exit;
+            }
+            
+            if (in_array($_SESSION['role_id'],array('84'))) {
+
+                $this->render(Yii::app()->params['approver_dashboard']);
+                exit;
+            }
+
+            if (in_array($_SESSION['role_id'],array('85'))) {
+
+                $this->render(Yii::app()->params['support_dashboard']);
+                exit;
+            }
+
+            // This condition was added by Aamir 15-07-2021
+            if (in_array($_SESSION['role_id'],array('86'))) {
+
+                $this->render(Yii::app()->params['admin_dashboard']);
+                exit;
+            }
+            
+            if (RolesExt::isSSOAdmin()) {
+                $roleInfo = RolesExt::getUserRoleViaId($_SESSION['uid']);
+                $sso_id = $roleInfo['sso_dept'];
+                $url = Yii::app()->createAbsoluteUrl('/mis/integratedDepartmentServices');
+                $this->redirect($url);
+                exit;
+            }
+            if (RolesExt::isDocumentVerifierUser() && $_SESSION['dept_id'] == 1) {                
+                $year = '2016';
+                if (isset($_GET['year']))
+                    $year = $_GET['year'];
+                $this->render('documentVerifierDashboardDoi', array("selectedYear" => $year));
+                exit;
+            }
+            if (RolesExt::isDocumentVerifierUser()) { 
+                $year = '2016';
+                if (isset($_GET['year']))
+                    $year = $_GET['year'];
+                $this->render('documentVerifierDashboardNew2', array("selectedYear" => $year));
+                exit;
+            }
+            if (RolesExt::isDMUser()) {
+                $this->render('DmNewDashboard');
+                exit;
+            }
+            if (RolesExt::isIpAdmin()) {
+                $this->redirect('/backoffice/PisMou/ipAdminListing/page/admin_listing1');
+                exit;
+            }
+            if (RolesExt::isHelpdeskUser()) {
+                $connection = Yii::app()->db;
+                //echo "<pre>";print_r($_SESSION);die;
+                $staff_id = TicketExt::getUserStaffId($_SESSION['email']);
+                //$staff_id = $staff_id>0?$staff_id:9999;
+                $dept_id = TicketExt::getUserDepartmentId($staff_id);
+                //$dept_id = $dept_id>0?$dept_id:9999;
+                $role_id = RolesExt::isHelpdeskUser();
+                // Total Ticket
+                $total_ticket = TicketExt::getTotalTickets($role_id, $staff_id, $dept_id);
+                //Total Open Ticket
+                $total_open_ticket = TicketExt::getTotalOpenTickets($role_id, $staff_id, $dept_id);
+                //Total Closed Ticket
+                $total_closed_ticket = TicketExt::getTotalClosedTickets($role_id, $staff_id, $dept_id);
+                //Total Answered Ticket
+                $total_answered_ticket = TicketExt::getTotalAnsweredTickets($role_id, $staff_id, $dept_id);
+                //Total Transfered Ticket
+                $total_transfered_ticket = TicketExt::getTotalTransferedTickets($role_id, $staff_id);
+                /* Get Tickets List */
+                $all_tickets = TicketExt::getTickets($role_id, $staff_id, $page, $dept_id);
+                $pages = new CPagination($total_ticket);
+                $this->render('helpdeskDashboard', array(
+                    'tickets' => $all_tickets,
+                    'pages' => $pages,
+                    'total_ticket' => $total_ticket,
+                    'total_open_ticket' => $total_open_ticket,
+                    'total_closed_ticket' => $total_closed_ticket,
+                    'total_answered_ticket' => $total_answered_ticket,
+                    'total_transfered_ticket' => $total_transfered_ticket
+                ));
+
+                exit;
+            }
+            /******** END OF PANKANJ CODE ****** */
+
+            $this->render('index');
+        } else {
+            $model = new LoginForm;
+            $this->redirect(array("/site/login"), $model);
+        }
+    }
+
+    public function actionQuery($page = 0) {
+        @session_start();
+        if (isset($_SESSION['uid']) && !empty($_SESSION['uid'])) {
+
+
+            /* Pankaj Kumar Tiwari   Date: 27Feb2018  */
+
+            if (RolesExt::isHelpdeskUser()) {
+
+                $connection = Yii::app()->db;
+
+                $staff_id = QueryExt::getUserStaffId($_SESSION['email']);
+                $dept_id = QueryExt::getUserDepartmentId($staff_id);
+                $role_id = RolesExt::isHelpdeskUser();
+
+
+                // Total Query
+                $total_queries = QueryExt::getTotalQuery($role_id, $staff_id, $dept_id);
+
+
+                //Total Open Query
+                $total_open_queries = QueryExt::getTotalOpenQuery($role_id, $staff_id, $dept_id);
+
+
+                //Total Closed Query
+                $total_closed_queries = QueryExt::getTotalClosedQuery($role_id, $staff_id, $dept_id);
+
+                //Total Answered Query
+                $total_answered_query = QueryExt::getTotalAnsweredQuery($role_id, $staff_id, $dept_id);
+
+
+                //Total Transfered Query
+                $total_transfered_queries = QueryExt::getTotalTransferedQuery($role_id, $staff_id);
+
+                /* Get Query List */
+                $all_queries = QueryExt::getAllQuery($role_id, $staff_id, $page, $dept_id);
+
+                $pages = new CPagination($total_queries);
+
+                $this->render('helpdeskQueryDashboard', array(
+                    'queries' => $all_queries,
+                    'pages' => $pages,
+                    'total_queries' => $total_queries,
+                    'total_open_queries' => $total_open_queries,
+                    'total_closed_queries' => $total_closed_queries,
+                    'total_answered_queries' => $total_answered_query,
+                    'total_transfered_queries' => $total_transfered_queries
+                ));
+            } else {
+
+                $this->redirect(array("/admin/default/index"));
+            }
+        } else {
+            $model = new LoginForm;
+            $this->redirect(array("/site/login"), $model);
+        }
+    }
+
+    public function actionApplicationview($app_sub_id) {
+        print_r($app_sub_id);
+    }
+
+    /**
+     * @return array action filters
+     */
+    public function filters() {
+        return array(
+            'accessControl', // perform access control for CRUD operations
+            'postOnly + delete', // we only allow deletion via POST request
+        );
+    }
+
+    /**
+     * Specifies the access control rules.
+     * This method is used by the 'accessControl' filter.
+     * @return array access control rules
+     */
+    /*    public function accessRules() {
+      return array(
+      array('allow', // allow admin user to perform 'admin' and 'delete' actions
+      'actions' => array('index', 'view', 'create', 'update', 'admin', 'delete'),
+      'users' => array('mail@email.com'),
+      ),
+      array('deny', // deny all users
+      'users' => array('*'),
+      ),
+      );
+      } */
+
+    /*
+     * @authour : Rahul Kumar
+     * @date: 16052018
+     * @Description : Nodal Performance Report Current FY
+     */
+
+//    public static function getNodalPerformenceReportCountOfStatusSelectedFY($status = null, $startDate = null, $endDate = null, $nextRoleID = null, $extraInMainStatus = null) {
+//        
+//        extract($_GET);
+//        $extraCondition = "";
+//        $extraCondition = "";
+//        $statusCondition = "";
+//        $verificationLevelCondition = "";
+//        $flg=0;
+//        
+//         // Applications Approved for Empowered Committee
+//        if ($nextRoleID == 33 || $nextRoleID == 34) {
+//            $verificationLevelCondition = " AND bo_application_verification_level.approv_status='P' ";
+//        }
+//        //  For Checking Status In main table
+//        if (!empty($extraInMainStatus)) {
+//            $extraCondition = " bo_application_submission.application_status IN ($extraInMainStatus) AND";
+//        }
+//        
+//        // For Passed Condition
+//        if ($status != "''") {
+//            $statusCondition = " bo_application_flow_logs.application_status IN ($status) AND ";
+//        }
+//        
+//        // Under Process
+//        if ($status == "'UNDER_PROCESSEED'" || $status == "'PENDING'") {
+//            if($status == "'UNDER_PROCESSEED'"){$st="<=1";}
+//            if($status == "'PENDING'"){$st=">1";}
+//            $statusCondition = " bo_application_submission.application_status IN ('P') AND "
+//                    . "    DATEDIFF(NOW(),DATE_FORMAT(bo_application_submission.application_created_date,'%Y-%m-%d'))$st  AND
+//              "; 
+//        }
+//        
+//        $sql = "select * from bo_application_flow_logs "
+//                . " LEFT JOIN bo_application_submission ON bo_application_flow_logs.submission_id=bo_application_submission.submission_id "
+//                . " LEFT JOIN bo_application_verification_level ON bo_application_flow_logs.submission_id=bo_application_verification_level.app_Sub_id "
+//                . "where $statusCondition $extraCondition "
+//                . "DATE(bo_application_flow_logs.created_date_time)>='$startDate' AND bo_application_submission.application_id=1  AND bo_application_submission.user_id!=11 "
+//                . "AND DATE(bo_application_flow_logs.created_date_time)<='$endDate' "
+//                . "AND bo_application_verification_level.next_role_id=$nextRoleID $verificationLevelCondition AND bo_application_submission.landrigion_id>0 "
+//                . "group by bo_application_flow_logs.submission_id ";
+//        // if($flg==1){echo $sql;die;}
+//        $Fields = Yii::app()->db->createCommand($sql)->queryAll();
+//      //  return "<p name=''>".count($Fields)."<span style='display:block'>--$sql</span></p>";
+//        return count($Fields);
+//    }
+//    
+
+    /*
+     * @authour : Rahul Kumar
+     * @date: 16052018
+     * @Description : Nodal Performance Report Carry Forworded
+     */
+
+//    static function getNodalPerformenceReportCountOfStatusCarryForward($status = null, $startDate = null, $endDate = null, $nextRoleID = null, $extraInMainStatus = null) {
+//
+//        extract($_GET);
+//        $sql2 = "select bo_application_flow_logs.submission_id from bo_application_flow_logs where bo_application_flow_logs.application_status IN ('ISA')
+//                    AND DATE(bo_application_flow_logs.created_date_time)>='$startDate' AND DATE(bo_application_flow_logs.created_date_time)<='$endDate'";
+//
+//        $extraCondition = "";
+//        $statusCondition = "";
+//        $verificationLevelCondition = "";
+//        // Applications Approved for Empowered Committee
+//        if ($nextRoleID == 33 || $nextRoleID == 34) {
+//            $verificationLevelCondition = " AND bo_application_verification_level.approv_status='P' ";
+//        }
+//        //  For Checking Status In main table
+//        if (!empty($extraInMainStatus)) {
+//            $extraCondition = " bo_application_submission.application_status IN ($extraInMainStatus) AND";
+//        }
+//        //For Passed Condition
+//        if ($status != "''") {
+//            $statusCondition = " bo_application_flow_logs.application_status IN ($status) AND ";
+//        }
+//         // Under Process
+//        if ($status == "'UNDER_PROCESSEED'" || $status == "'PENDING'") {
+//            if($status == "'UNDER_PROCESSEED'"){$st="<=1";}
+//            if($status == "'PENDING'"){$st=">1";}
+//            $statusCondition = " bo_application_submission.application_status IN ('P') AND "
+//                    . "    DATEDIFF(NOW(),DATE_FORMAT(bo_application_submission.application_created_date,'%Y-%m-%d'))$st  AND
+//              "; 
+//        }
+//        $revert="";
+//        if($status=='IBD'){
+//            $revert=" AND bo_application_submission.application_status!='H' ";
+//        }
+//
+//        $sql = "select * from bo_application_flow_logs "
+//                . " LEFT JOIN bo_application_submission ON bo_application_flow_logs.submission_id=bo_application_submission.submission_id "
+//                . " LEFT JOIN bo_application_verification_level ON bo_application_flow_logs.submission_id=bo_application_verification_level.app_Sub_id "
+//                . "where $statusCondition $extraCondition "
+//                . " DATE(bo_application_flow_logs.created_date_time)>='$startDate' AND bo_application_submission.application_id=1   AND bo_application_submission.user_id!=11 "
+//                . "AND DATE(bo_application_flow_logs.created_date_time)<='$endDate' "
+//                . "AND bo_application_verification_level.next_role_id=$nextRoleID $revert $verificationLevelCondition"
+//                . " AND bo_application_flow_logs.submission_id NOT IN ($sql2) "
+//                . "group by bo_application_flow_logs.submission_id ";
+////if($status=="''" && $extraInMainStatus=="'H"){ echo $sql;die; }
+//        //$sql ="select * from bo_application_flow_logs where application_status IN ($status)
+//        //AND DATE(created_date_time)>='$startDate' AND DATE(created_date_time)<='$startDate' AND submission_id NOT IN ($sql2)  group by submission_id" ;
+//        $Fields = Yii::app()->db->createCommand($sql)->queryAll();
+//       // return "<p name=''>".count($Fields)."<span style='display:block'>--$sql</span></p>";
+//       return count($Fields);
+//    }
+
+
+    /* Rahul Kumar :  02072018 */
+    public function actionNodalPerformenceReport() {
+
+        $this->render('nodalPerformanceReport1');
+    }
+
+    /*
+     * @authour : Rahul Kumar
+     * @date: 16052018
+     * @Description : Nodal Performance Report Current FY
+     */
+
+    public static function getNodalPerformenceReportCountOfStatusSelectedFY($status = null, $startDate = null, $endDate = null, $nextRoleID = null, $extraInMainStatus = null, $type = null) {
+
+        extract($_GET);
+        $extraCondition = "";
+        $statusCondition = "";
+        $verificationLevelCondition = "";
+        $flg = 0;
+
+        // Applications Approved for Empowered Committee
+        if ($nextRoleID == 33 || $nextRoleID == 34) {
+            $verificationLevelCondition = " AND bo_application_verification_level.approv_status='P' ";
+        }
+        //  For Checking Status In main table
+        if (isset($extraInMainStatus) && !empty($extraInMainStatus) && ($extraInMainStatus != null)) {
+            $extraCondition = " bo_application_submission.application_status IN ($extraInMainStatus) AND";
+        }
+
+        // For Passed Condition
+        if ($status != "''") {
+            $statusCondition = " bo_application_flow_logs.application_status IN ($status) AND ";
+        }
+
+        // For Passed Condition
+        if ($status == "'IBD'") {
+            $statusCondition = " bo_application_flow_logs.application_status IN ($status) AND bo_application_submission.submission_id NOT IN (select bo_application_submission.submission_id from bo_application_submission where application_status IN('H')) AND ";
+        }
+
+        if ($status == "'ISA'" && $extraInMainStatus == "'F'") {
+            $statusCondition = " bo_application_flow_logs.application_status IN ($status) AND bo_application_submission.submission_id NOT IN (select bo_application_verification_level.app_Sub_id from bo_application_verification_level Where bo_application_verification_level.next_role_id IN ('33','34') ) AND ";
+        }
+
+
+        // Under Process
+        if ($status == "'UNDER_PROCESSEED'" || $status == "'PENDING'") {
+            if ($status == "'UNDER_PROCESSEED'") {
+                $st = "<=1";
+            }
+            if ($status == "'PENDING'") {
+                $st = ">1";
+            }
+            $statusCondition = " bo_application_submission.application_status IN ('P') AND "
+                    . "    DATEDIFF(NOW(),DATE_FORMAT(bo_application_submission.application_created_date,'%Y-%m-%d'))$st  AND
+              ";
+        }
+
+        $sql = "select * from bo_application_flow_logs "
+                . " LEFT JOIN bo_application_submission ON bo_application_flow_logs.submission_id=bo_application_submission.submission_id "
+                . " LEFT JOIN bo_application_verification_level ON bo_application_flow_logs.submission_id=bo_application_verification_level.app_Sub_id "
+                . "where $statusCondition $extraCondition "
+                . "DATE(bo_application_flow_logs.created_date_time)>='$startDate' AND bo_application_submission.application_id=1  AND bo_application_submission.user_id!=11 "
+                . "AND DATE(bo_application_flow_logs.created_date_time)<='$endDate' "
+                . "AND bo_application_verification_level.next_role_id=$nextRoleID $verificationLevelCondition AND bo_application_submission.landrigion_id>0 "
+                . "group by bo_application_flow_logs.submission_id ";
+        // echo $sql;die;
+        // if($flg==1){echo $sql;die;}
+        $Fields = Yii::app()->db->createCommand($sql)->queryAll();
+
+        //  return "<p name=''>".count($Fields)."<span style='display:block'>--$sql</span></p>";
+        if ($type == 'list')
+            return $Fields;
+        else
+            return count($Fields);
+    }
+
+    /*    public function actionNodalPerformanceList($status=null, $startDate=null, $endDate=null, $nextRoleID=null, $extraInMainStatus=null ,$type=null,$case=null) { */
+
+    public function actionNodalPerformanceList($whattoshow = null, $startdate = null, $enddate = null) {
+
+        if ($whattoshow == "fydas") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, null, 'list');
+        }
+        if ($whattoshow == "fysas") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, null, 'list');
+        }
+        if ($whattoshow == "fydas_both") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+
+        if ($whattoshow == "fyd_app_rev") {
+
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'H'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "fys_app_rev") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 4, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'H'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "fyboth_app_rev") {
+
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'H'", 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 4, null, 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'H'", 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+
+        if ($whattoshow == "fydPfor_response") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'H'", 'list');
+//print_r($result);			die;
+        }
+        if ($whattoshow == "fysPfor_response") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'H'", 'list');
+        }
+        if ($whattoshow == "fybothPfor_response") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'H'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'H'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+
+        if ($whattoshow == "fysresponse_rec_app") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 4, 0, 'list');
+        }
+
+        if ($whattoshow == "fydapp_forw_dep") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'F'", 'list');
+        }
+        if ($whattoshow == "fysapp_forw_dep") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'F'", 'list');
+        }
+        if ($whattoshow == "fybothapp_forw_dep") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'F'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'F'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+
+        if ($whattoshow == "fyd_app_not_for_dep") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 7, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "fys_app_not_for_dep") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 4, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "fyboth_app_not_for_dep") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 7, null, 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 4, null, 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+        if ($whattoshow == "fysapp_forw_dep") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'F'", 'list');
+        }
+        if ($whattoshow == "fydunder_proc") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+        }
+        if ($whattoshow == "fysunder_proc") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+        }
+        if ($whattoshow == "fybothunder_proc") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+
+        if ($whattoshow == "fydapp_apro_emp_com") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 33, null, 'list');
+        }
+        if ($whattoshow == "fysapp_apro_emp_com") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 34, null, 'list');
+        }
+        if ($whattoshow == "fybothapp_apro_emp_com") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 33, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 34, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "fydapp_disposed") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'A'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'R'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "fysapp_disposed") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'A'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'R'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "fybothapp_disposed") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'A'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'R'", 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'A'", 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'R'", 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+        if ($whattoshow == "fydapp_disposed_appr") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'A'", 'list');
+        }
+        if ($whattoshow == "fysapp_disposed_appr") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'A'", 'list');
+        }
+        if ($whattoshow == "fybothapp_disposed_appr") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'A'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'A'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+
+        if ($whattoshow == "fydapp_disposed_rej") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'R'", 'list');
+        }
+        if ($whattoshow == "fysapp_disposed_rej") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'R'", 'list');
+        }
+        if ($whattoshow == "fybothapp_disposed_rej") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'R'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'R'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "fyd_pend_dic") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 7, null, 'list');
+        }
+        if ($whattoshow == "fys_pend_dic") {
+            /* $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 4, null,'list'); */
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 4, null, 'list');
+        }
+        if ($whattoshow == "fyboth_pend_dic") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "fyd_res_rec_from_app") {
+            //$subID=array();			
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 7, null, 'list');
+        }
+        if ($whattoshow == "fys_res_rec_from_app") {
+
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 4, null, 'list');
+        }
+        if ($whattoshow == "fyboth_res_rec_from_app") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        //Carray forwarded application submitted
+        if ($whattoshow == "cfd_app_sub") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, null, 'list');
+        }
+        if ($whattoshow == "cfs_app_sub") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, null, 'list');
+        }
+        if ($whattoshow == "cfboth_app_sub") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        //Carray forwarded Applications Reverted
+        if ($whattoshow == "cfd_app_reverted") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'H'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "cfs_app_reverted") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 4, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'H'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "cfboth_app_reverted") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'H'", 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 4, null, 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'H'", 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+        //carry forwarded 2.1 : Responses received from Applicant for Query
+        if ($whattoshow == "cfd_res_rec_app_for_q") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 7, null, 'list');
+        }
+        if ($whattoshow == "cfs_res_rec_app_for_q") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 4, null, 'list');
+        }
+
+        if ($whattoshow == "cfboth_res_rec_app_for_q") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        //carry forwarded 2.2 : Pending for response
+        if ($whattoshow == "cfd_pen_res") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'H'", 'list');
+        }
+        if ($whattoshow == "cfs_pen_res") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'H'", 'list');
+        }
+
+        if ($whattoshow == "cfboth_pen_res") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'H'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'H'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+
+        //carry forwarded 3 : Applications Forwarded to Department
+        if ($whattoshow == "cfd_app_for_dep") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'F'", 'list');
+        }
+        if ($whattoshow == "cfs_app_for_dep") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'F'", 'list');
+        }
+
+        if ($whattoshow == "cfboth_app_for_dep") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'F'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'F'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+
+        //carry forwarded 4 : Application Not forwarded to Department
+        if ($whattoshow == "cfd_app_not_for_dep") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 7, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "cfs_app_not_for_dep") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 4, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "cfboth_app_not_for_dep") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 7, null, 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 4, null, 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+        //carry forwarded 4.1 : Under process at DIC/ DoI
+        if ($whattoshow == "cfd_under_proc_dic") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+        }
+        if ($whattoshow == "cfs_under_proc_dic") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+        }
+
+        if ($whattoshow == "cfboth_under_proc_dic") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        //carry forwarded 4.2 : Pending at DIC/ DoI
+        if ($whattoshow == "cfd_pend_dic") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 7, null, 'list');
+        }
+        if ($whattoshow == "cfs_pend_dic") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 4, null, 'list');
+        }
+        if ($whattoshow == "cfboth_pend_dic") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        //carry forwarded 5 : Applications Approved for Empowered Committee
+
+        if ($whattoshow == "cfd_app_appr_emp_comm") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 33, "'F'", 'list');
+        }
+        if ($whattoshow == "cfs_app_appr_emp_comm") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 34, "'F'", 'list');
+        }
+
+        if ($whattoshow == "cfboth_app_appr_emp_comm") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 33, "'F'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 34, "'F'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+
+        //carry forwarded 6 : Applications Disposed		
+        if ($whattoshow == "cfd_app_disposed") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'A'", 'list');
+        }
+        if ($whattoshow == "cfs_app_disposed") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'A'", 'list');
+        }
+        if ($whattoshow == "cfboth_app_disposed") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'A'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'A'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        //carry forwarded 6.1 : Applications Disposed (Approved ) 
+        if ($whattoshow == "cfd_app_disposed_appr") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'A'", 'list');
+        }
+        if ($whattoshow == "cfs_app_disposed_appr") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'A'", 'list');
+        }
+        if ($whattoshow == "cfboth_app_disposed_appr") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'A'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'A'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        //carry forwarded 6.2 : Applications Disposed (Rejected)
+        if ($whattoshow == "cfd_app_disposed_rej") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'R'", 'list');
+        }
+        if ($whattoshow == "cfs_app_disposed_rej") {
+            $result = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'R'", 'list');
+        }
+        if ($whattoshow == "cfboth_app_disposed_rej") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'R'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'R'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+
+        //both application submitted
+        if ($whattoshow == "bothd_app_sub") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "boths_app_sub") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "both2_app_sub") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, null, 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, null, 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+
+        //both 2: Applications Reverted		
+        if ($whattoshow == "bothd_app_rev") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 7, null, 'list');
+
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'H'", 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'H'", 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+        if ($whattoshow == "boths_app_rev") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 4, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 4, null, 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'H'", 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'H'", 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+        if ($whattoshow == "both2_app_rev") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 7, null, 'list');
+
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'H'", 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'H'", 'list');
+
+            $result5 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 4, null, 'list');
+            $result6 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 4, null, 'list');
+            $result7 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'H'", 'list');
+            $result8 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'H'", 'list');
+            $result = array_merge($result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8);
+        }
+
+        //both 2.1 : Responses received from Applicant for Query		
+        if ($whattoshow == "bothd_res_rec_app") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 7, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "boths_res_rec_app") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 4, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "both2_res_rec_app") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 7, null, 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'IBD'", $startdate, $enddate, 4, null, 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'RBI'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+
+        //both 2.2 : Pending for response
+        if ($whattoshow == "bothd_pen_res") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'H'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'H'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "boths_pen_res") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'H'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'H'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "both2_pen_res") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'H'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'H'", 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'H'", 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'H'", 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+
+        // Both 3 : Applications Forwarded to Department
+        if ($whattoshow == "bothd_app_for_dep") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'F'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'F'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "boths_app_for_dep") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'F'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'F'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "both2_app_for_dep") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'F'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'F'", 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'F'", 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'F'", 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+
+        // Both 4 : Application Not forwarded to Department
+        if ($whattoshow == "both2d_app_not_for_dep") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 7, null, 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 7, null, 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+        if ($whattoshow == "both2s_app_not_for_dep") {
+
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 4, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 4, null, 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+
+        if ($whattoshow == "both2_app_not_for_dep") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 7, null, 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 7, null, 'list');
+            $result5 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 4, null, 'list');
+            $result6 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 4, null, 'list');
+            $result7 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+            $result8 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8);
+        }
+        // Both 4.1 : Under process at DIC/ DoI
+        if ($whattoshow == "bothd_under_pro_dic") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "boths_under_pro_dic") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "both2_under_pro_dic") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 7, null, 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'UNDER_PROCESSEED'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+        // Both 4.2 : Pending at DIC/ DoI		
+        if ($whattoshow == "both2d_pend_dic") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 7, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "both2s_pend_dic") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 4, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "both2_pend_dic") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 7, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 7, null, 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'PENDING'", $startdate, $enddate, 4, null, 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("'PENDING'", $startdate, $enddate, 4, null, 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+
+        //both 5 : Applications Approved for Empowered Committee 
+        if ($whattoshow == "bothd_app_appr_emp_comm") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 33, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 33, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "boths_app_appr_emp_comm") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 34, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 34, null, 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "both2_app_appr_emp_comm") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 33, null, 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 33, null, 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 34, null, 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 34, null, 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+
+        //both 6 : Applications Disposed		
+        if ($whattoshow == "bothd_app_dis") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'A'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'A'", 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'R'", 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'R'", 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+        if ($whattoshow == "boths_app_dis") {
+
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'A'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'A'", 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'R'", 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'R'", 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+        if ($whattoshow == "both2_app_dis") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'A'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'A'", 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'R'", 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'R'", 'list');
+            $result5 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'A'", 'list');
+            $result6 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'A'", 'list');
+            $result7 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'R'", 'list');
+            $result8 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'R'", 'list');
+            $result = array_merge($result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8);
+        }
+        //both 6.1 : Applications Disposed (Approved )
+        if ($whattoshow == "bothd_app_dis_appr") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'A'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'A'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "boths_app_dis_appr") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'A'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'A'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "both2_app_dis_appr") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'A'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'A'", 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'A'", 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'A'", 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+        //both 6.2 : Applications Disposed (Rejected )		
+        if ($whattoshow == "bothd_app_dis_rej") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'R'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'R'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+        if ($whattoshow == "boths_app_dis_rej") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'R'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'R'", 'list');
+            $result = array_merge($result1, $result2);
+        }
+
+        if ($whattoshow == "both2_app_dis_rej") {
+            $result1 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 7, "'R'", 'list');
+            $result2 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 7, "'R'", 'list');
+            $result3 = DefaultController::getNodalPerformenceReportCountOfStatusSelectedFY("'ISA'", $startdate, $enddate, 4, "'R'", 'list');
+            $result4 = DefaultController::getNodalPerformenceReportCountOfStatusCarryForward("''", $startdate, $enddate, 4, "'R'", 'list');
+            $result = array_merge($result1, $result2, $result3, $result4);
+        }
+
+
+
+        $this->render('nodalPerformanceList', array('applicationData' => $result));
+    }
+
+    /*
+     * @authour : Rahul Kumar
+     * @date: 16052018
+     * @Description : Nodal Performance Report Carry Forworded
+     */
+
+    static function getNodalPerformenceReportCountOfStatusCarryForward($status = null, $startDate = null, $endDate = null, $nextRoleID = null, $extraInMainStatus = null, $type = null) {
+
+        extract($_GET);
+        $sql2 = "select bo_application_flow_logs.submission_id from bo_application_flow_logs where bo_application_flow_logs.application_status IN ('ISA')
+                    AND DATE(bo_application_flow_logs.created_date_time)>='$startDate' AND DATE(bo_application_flow_logs.created_date_time)<='$endDate'";
+
+        $extraCondition = "";
+        $statusCondition = "";
+        $verificationLevelCondition = "";
+        // Applications Approved for Empowered Committee
+        if ($nextRoleID == 33 || $nextRoleID == 34) {
+            $verificationLevelCondition = " AND bo_application_verification_level.approv_status='P' ";
+        }
+        //  For Checking Status In main table
+        if (!empty($extraInMainStatus)) {
+            $extraCondition = " bo_application_submission.application_status IN ($extraInMainStatus) AND";
+        }
+        //For Passed Condition
+        if ($status != "''") {
+            $statusCondition = " bo_application_flow_logs.application_status IN ($status) AND ";
+        }
+        // Under Process
+        if ($status == "'UNDER_PROCESSEED'" || $status == "'PENDING'") {
+            if ($status == "'UNDER_PROCESSEED'") {
+                $st = "<=1";
+            }
+            if ($status == "'PENDING'") {
+                $st = ">1";
+            }
+            $statusCondition = " bo_application_submission.application_status IN ('P') AND "
+                    . "    DATEDIFF(NOW(),DATE_FORMAT(bo_application_submission.application_created_date,'%Y-%m-%d'))$st  AND
+              ";
+        }
+        $revert = "";
+        /*  if($status=='IBD'){
+          $revert=" AND bo_application_submission.application_status!='H' ";
+          } */
+
+
+        // For Passed Condition
+        if ($status == "'IBD'") {
+            $statusCondition = " bo_application_flow_logs.application_status IN ($status) AND bo_application_submission.submission_id NOT IN (select bo_application_submission.submission_id from bo_application_submission where application_status IN('H')) AND ";
+        }
+
+        if ($status == "'ISA'" && $extraInMainStatus == "'F'") {
+            $statusCondition = " bo_application_flow_logs.application_status IN ($status) AND bo_application_submission.submission_id NOT IN (select bo_application_verification_level.app_Sub_id from bo_application_verification_level Where bo_application_verification_level.next_role_id IN ('33','34') ) AND ";
+        }
+
+        $sql = "select * from bo_application_flow_logs "
+                . " LEFT JOIN bo_application_submission ON bo_application_flow_logs.submission_id=bo_application_submission.submission_id "
+                . " LEFT JOIN bo_application_verification_level ON bo_application_flow_logs.submission_id=bo_application_verification_level.app_Sub_id "
+                . "where $statusCondition $extraCondition "
+                . " DATE(bo_application_flow_logs.created_date_time)>='$startDate' AND bo_application_submission.application_id=1   AND bo_application_submission.user_id!=11 "
+                . "AND DATE(bo_application_flow_logs.created_date_time)<='$endDate' "
+                . "AND bo_application_verification_level.next_role_id=$nextRoleID $verificationLevelCondition"
+                . " AND bo_application_flow_logs.submission_id NOT IN ($sql2) "
+                . "group by bo_application_flow_logs.submission_id ";
+
+        $Fields = Yii::app()->db->createCommand($sql)->queryAll();
+
+        if ($type == 'list')
+            return $Fields;
+        else
+            return count($Fields);
+    }
+	
+	public function actionFbNodalPendingApplication()
+	{
+		$this->render('form_builder_verifier');
+	}
+	
+        
+         public function actionAbeyanceListing() {
+         $this->render('abeyance_listing');
+        }
+		public function actionManageuserservices(){
+			$this->render('manage_user_services');
+		}
+	public function actionGetUserServices(){
+		$uid=$_POST['user_id'];
+		$response=array();
+		if($uid!=""){
+			 $sql = "select * from tbl_user_service_role where user_id='".$uid."' and is_active='Y'";
+				
+			$res = Yii::app()->db->createCommand($sql)->queryAll();
+			$roles=array();
+				$services=array();
+				
+			if(count($res)>0){
+				
+				foreach($res as $value){
+					
+					$services[]=$value['service_id'];
+					$roles[]=$value['role_id'];
+				}
+				
+			}
+			$response['service']=$services;
+			$response['role']=$roles;
+			echo json_encode($response);
+			die();
+			
+		}
+		
+	}	
+	public function actionAssignServiceRole()
+	{
+		//$model=new UserServiceRole;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['assign_role']))
+		{
+			
+			 $sql = "UPDATE tbl_user_service_role SET is_active='N', updated_on='".date('Y-m-d H:i:s')."' where user_id='".$_POST['user_id']."' and is_active='Y'";
+			 $command=Yii::app()->db->createCommand($sql);
+			$command->execute();
+			 if(count($_POST['service_id'])>0 && count($_POST['role']>0)){
+				 for($r=0;$r<count($_POST['role']);$r++){
+				 $role=$_POST['role'][$r];
+				 foreach($_POST['service_id'] as $ser){
+					  $sql_insert="INSERT INTO tbl_user_service_role (user_id, service_id,role_id,is_active,created_on,updated_on)
+VALUES('". $_POST['user_id'] ."','".$ser."','".$role."','Y','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."')";
+			$command=Yii::app()->db->createCommand($sql_insert);
+			$command->execute();
+				 }
+				 }
+				 Yii::app()->user->setFlash('Success', "Success: Service assigned to user succesfully.");
+         					 $this->redirect(array('/admin/default/manageuserservices'));
+         					  exit;
+			 }
+			 else{
+				  Yii::app()->user->setFlash('Error', "Error: Please select atleast one services and role.");
+         					 $this->redirect(array('/admin/default/manageuserservices'));
+         					  exit;
+			 
+			 }
+			 
+		
+		}
+
+	}
+	
+	public function actionRolesList(){
+		
+		$this->render('roles_list');
+	}
+	public function actionAddrole(){
+		if(isset($_POST['add_role']) )
+		{
+			if(!empty($_POST['role_name'])){
+				//check for duplicate
+				$sql = "select * from bo_roles where role_name='".$_POST['role_name']."'";
+				$res = Yii::app()->db->createCommand($sql)->queryRow();
+				if($res['role_id']==""){
+				$sql_insert="INSERT INTO bo_roles (role_name, rele_desc,is_role_active,is_external)
+	VALUES('".$_POST['role_name']."','".$_POST['role_desc']."','Y','".$_POST['is_external']."')";
+				$command=Yii::app()->db->createCommand($sql_insert);
+				$command->execute();
+				 Yii::app()->user->setFlash('Success', "Success: Role added succesfully.");
+								 $this->redirect(array('/admin/default/rolesList'));
+								  exit;
+				}
+				else{
+					Yii::app()->user->setFlash('Error', "Error: Role already exists.");
+								 $this->redirect(array('/admin/default/rolesList'));
+								  exit;
+				}
+			}
+			else{
+				Yii::app()->user->setFlash('Error', "Error: Role name is required.");
+								 $this->redirect(array('/admin/default/rolesList'));
+								  exit;
+			}
+		}
+	}
+	
+	public function actionUserslist(){
+		$this->render('users_list');
+	}
+	public function actionEmailExist(){
+		
+		if(isset($_REQUEST['email']))
+		{
+			$sql = "select uid from bo_user where email='".$_REQUEST['email']."'";
+			$res = Yii::app()->db->createCommand($sql)->queryRow();
+			if($res['uid']!=""){
+				echo "dup";
+			}
+			else{
+				echo "";
+			}
+		}
+		
+		die();
+	}
+	public function actionMobileExists(){
+
+		if(isset($_REQUEST['mobile']) && $_REQUEST['mobile']!="")
+		{
+			$sql = "select uid from bo_user where mobile='".$_REQUEST['mobile']."'";
+			$res = Yii::app()->db->createCommand($sql)->queryRow();
+			if($res['uid']!=""){
+				echo "dup";
+			}
+			else{
+				echo "";
+			}
+		}
+		
+		die();
+	}
+	
+	public function actionAddUser(){
+		if(isset($_POST['email'])){
+		$pass = hash_hmac('sha1', $_POST['password'], PASSWORD_SECRET_KEY);
+		$sql_insert="INSERT INTO bo_user (full_name, middle_name,last_name,email,email_alert,fax,delegate_officer_number,delegate_officer_name,delegate_officer_email,office_no,mobile,password,created_datetime,dept_id,disctrict_id,np_user_id,is_for_testing,is_active,system_user)
+VALUES('".$_POST['full_name']."','".$_POST['middle_name']."','".$_POST['last_name']."','".$_POST['email']."','".$_POST['email']."','".$_POST['fax']."','".$_POST['delegate_officer_number']."','".$_POST['delegate_officer_name']."','".$_POST['delegate_officer_email']."','".$_POST['office_no']."','".$_POST['mobile']."','".$pass."','".date('Y-m-d H:i:s')."','1','','','N','".$_POST['is_active']."','".$_POST['system_user']."')";
+$command=Yii::app()->db->createCommand($sql_insert);
+	$command->execute();
+$id = Yii::app()->db->getLastInsertID();
+		
+	$sql_insert_log="INSERT INTO bo_user_logs (edited_by, action,before_edit,after_edit,remote_ip,user_agent,other_info,created_time)
+VALUES('".$_SESSION['uid']."','create_user','','','".$_SERVER['REMOTE_ADDR']."','".$_SERVER['HTTP_USER_AGENT']."','".$id."' ,'".date('Y-m-d H:i:s')."')";
+		$command=Yii::app()->db->createCommand($sql_insert_log);
+		
+			$command->execute();	
+			 Yii::app()->user->setFlash('Success', "Success: User added succesfully.");
+         					 $this->redirect(array('/admin/default/userslist'));
+         					  exit;
+		}
+	}
+	public function actionAssignUserRole(){
+
+			$this->render('assign_user_role');	
+	}
+	public function actionSaveUserrole(){
+		
+		if(isset($_POST['assign_role']))
+		{
+			
+			 if($_POST['user_id']!="" && count($_POST['role_id'])>0){
+				 
+				 $sql = "SELECT * from bo_user_role_mapping Where user_id='".$_POST['user_id']."' and is_mapping_active='Y'";
+				 $command=Yii::app()->db->createCommand($sql);
+			  $res = $command->queryAll();
+			  $existRole=array();
+			  $del_rol=array();
+			  if(count($res)>0){
+				  for($j=0;$j<count($res);$j++){
+					  if(!in_array($res[$j]['role_id'],$_POST['role_id'])){
+						  $del_rol[]=$res[$j]['role_id'];
+						   $sql = "UPDATE bo_user_role_mapping SET is_mapping_active='N', modified_time='".date('Y-m-d H:i:s')."' where user_id='".$_POST['user_id']."' and role_id='".$res[$j]['role_id']."' and is_mapping_active='Y'";
+						  $command=Yii::app()->db->createCommand($sql);
+						  $command->execute();
+					  }
+					  else{
+						  $existRole[]=$res[$j]['role_id'];
+					  }
+				  }
+			  }
+				 
+			$newRole=array();
+				 
+				 foreach($_POST['role_id'] as $rol){
+					 if(!in_array($rol,$existRole)){
+						 $newRole[]=$rol;
+					  $sql_insert="INSERT INTO bo_user_role_mapping (user_id, role_id,department_id, lr_id, sso_dept, created_time, modified_time, is_mapping_active)
+VALUES('". $_POST['user_id'] ."','".$rol."','1','829','','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."','Y')";
+			$command=Yii::app()->db->createCommand($sql_insert);
+			$command->execute();
+					 }
+				 }
+				 if(count($del_rol)>0 || count($newRole)>0){
+					 $sql_insert_log="INSERT INTO bo_user_logs (edited_by, action,before_edit,after_edit,remote_ip,user_agent,other_info,created_time)
+VALUES('".$_SESSION['uid']."','role_update','','','".$_SERVER['REMOTE_ADDR']."','".$_SERVER['HTTP_USER_AGENT']."','".$_POST['user_id']."' ,'".date('Y-m-d H:i:s')."')";
+		$command=Yii::app()->db->createCommand($sql_insert_log);
+		
+			$command->execute();
+				 }
+				 Yii::app()->user->setFlash('Success', "Success: Roles assigned to user succesfully.");
+         					 $this->redirect(array('/admin/default/assignUserRole'));
+         					  exit;
+			 }
+			 else{
+				 Yii::app()->user->setFlash('Error', "Error: Please select user and at least one role.");
+         					 $this->redirect(array('/admin/default/assignUserRole'));
+         					  exit;
+			 }
+			 
+		
+		}
+	}
+	public function actionGetUserRoles(){
+		$uid=$_POST['user_id'];
+		$response=array();
+		if($uid!=""){
+			 $sql = "select role_id from bo_user_role_mapping where user_id='".$uid."' and is_mapping_active='Y'";
+				
+			$res = Yii::app()->db->createCommand($sql)->queryAll();
+			if(count($res)>0){
+				
+				$roles=array();
+				foreach($res as $value){
+					$roles[]=$value['role_id'];
+				}
+				$response['roles']=$roles;
+			}
+			
+		}
+		echo json_encode($response);
+			die();
+	}
+	public function actionManagePrivileges(){
+
+			$this->render('manage_user_privileges');	
+	}
+	
+	public function actionSaveUserprivileges(){
+		
+		if(isset($_POST['manage_access']))
+		{$modules=array();
+			if(isset($_POST['module_id'])){
+				$modules=$_POST['module_id'];
+			}
+			if(isset($_POST['privi_type']) && ($_POST['user_id']!="" || $_POST['role_id']!="")){
+			if($_POST['user_id']!=""){
+				$add="N";
+				$edit="N";
+				$delete="N";
+				if(isset($_REQUEST['action'])){
+					if(in_array("add",$_REQUEST['action'])){
+								$add="Y";
+							}
+							else{
+								$add="N";
+							}
+							if(in_array("edit",$_REQUEST['action'])){
+								$edit="Y";
+							}
+							else{
+								$edit="N";
+							}
+							if(in_array("delete",$_REQUEST['action'])){
+								$delete="Y";
+							}
+							else{
+								$delete="N";
+							}
+				}
+				 $sql = "SELECT * from bo_user_privileges Where is_active='Y' and user_id='".$_POST['user_id']."' ";
+				
+					$command=Yii::app()->db->createCommand($sql);
+				    $prev_rec = $command->queryAll();
+						 $exist=array();
+					 $del=array();
+					if(count($prev_rec)>0){
+						foreach($prev_rec as $rec){
+							if(!in_array($rec['module_id'],$modules)){
+								//delete
+								$del[]=$rec['module_id'];
+								 $sql = "UPDATE bo_user_privileges SET is_active='N', updated_on='".date('Y-m-d H:i:s')."' Where is_active='Y' and user_id='".$_POST['user_id']."' and module_id='".$rec['module_id']."'";
+						  $command=Yii::app()->db->createCommand($sql);
+						  $command->execute();
+							}
+							else{
+								$exist[]=$rec['module_id'];
+							}
+						}
+					}
+					if(isset($_POST['module_id'])){
+						
+						for($i=0;$i<count($_POST['module_id']);$i++){
+							
+							if(in_array($_POST['module_id'][$i],$exist)){
+								//update
+								 $sql = "UPDATE bo_user_privileges SET add_action='".$add."', edit_action='".$edit."', delete_action='".$delete."', updated_on='".date('Y-m-d H:i:s')."' Where is_active='Y' and user_id='".$_POST['user_id']."' and module_id='".$_POST['module_id'][$i]."'";
+								  $command=Yii::app()->db->createCommand($sql);
+								  $command->execute();
+							}
+							else{
+								//insert
+								 $sql_insert="INSERT INTO bo_user_privileges (module_id, user_id,role_id,add_action,edit_action,delete_action,created_date,updated_on,is_active)
+		VALUES('".$_POST['module_id'][$i]."','".$_POST['user_id']."','','".$add."','".$edit."','".$delete."','".date('Y-m-d H:i:s')."' ,'".date('Y-m-d H:i:s')."','Y')";
+				$command=Yii::app()->db->createCommand($sql_insert);
+				
+					$command->execute();
+							}
+							
+						}
+					}
+					$modules=implode(",",$_POST['module_id']);
+						  $sql_insert_log="INSERT INTO bo_user_privileges_logs (edited_by,action,module_id,user_id,role_id,add_action,edit_action,delete_action,created_time,remote_ip,user_agent)
+		VALUES('".$_SESSION['uid']."','assign_user_privileges','".$modules."','".$_POST['user_id']."','','".$add."','".$edit."','".$delete."','".date('Y-m-d H:i:s')."','".$_SERVER['REMOTE_ADDR']."','".$_SERVER['HTTP_USER_AGENT']."' )";
+	
+				$command=Yii::app()->db->createCommand($sql_insert_log);
+				$command->execute();
+					Yii::app()->user->setFlash('Success', "Success: Privileges assigned to user succesfully.");
+									 $this->redirect(array('/admin/default/managePrivileges'));
+									  exit;
+			}
+			else if($_POST['role_id']!=""){
+				$add="N";
+				$edit="N";
+				$delete="N";
+				if(isset($_REQUEST['action'])){
+				if(in_array("add",$_REQUEST['action'])){
+								$add="Y";
+							}
+							else{
+								$add="N";
+							}
+							if(in_array("edit",$_REQUEST['action'])){
+								$edit="Y";
+							}
+							else{
+								$edit="N";
+							}
+							if(in_array("delete",$_REQUEST['action'])){
+								$delete="Y";
+							}
+							else{
+								$delete="N";
+							}
+				}
+				 $exist=array();
+				 $sql = "SELECT * from bo_user_privileges Where is_active='Y' and role_id='".$_POST['role_id']."' ";
+				  $command=Yii::app()->db->createCommand($sql);
+				    $prev_rec = $command->queryAll();
+						if(count($prev_rec)>0){
+						foreach($prev_rec as $rec){
+							if(!in_array($rec['module_id'],$modules)){
+								//delete
+								$del[]=$rec['module_id'];
+								 $sql = "UPDATE bo_user_privileges SET is_active='N', updated_on='".date('Y-m-d H:i:s')."' Where is_active='Y' and role_id='".$_POST['role_id']."' and module_id='".$rec['module_id']."'";
+						  $command=Yii::app()->db->createCommand($sql);
+						  $command->execute();
+							}
+							else{
+								$exist[]=$rec['module_id'];
+							}
+						}
+					}
+					if(isset($_POST['module_id'])){
+							
+						for($i=0;$i<count($_POST['module_id']);$i++){
+						
+							if(in_array($_POST['module_id'][$i],$exist)){
+								//update
+								
+								 $sql = "UPDATE bo_user_privileges SET add_action='".$add."', edit_action='".$edit."', delete_action='".$delete."', updated_on='".date('Y-m-d H:i:s')."' Where is_active='Y' and role_id='".$_POST['role_id']."' and module_id='".$_POST['module_id'][$i]."'";
+								  $command=Yii::app()->db->createCommand($sql);
+								  $command->execute();
+								  
+								  
+				
+					$command->execute();
+							}
+							else{
+								//insert
+								 $sql_insert="INSERT INTO bo_user_privileges (module_id, user_id,role_id,add_action,edit_action,delete_action,created_date,updated_on,is_active)
+		VALUES('".$_POST['module_id'][$i]."','','".$_POST['role_id']."','".$add."','".$edit."','".$delete."','".date('Y-m-d H:i:s')."' ,'".date('Y-m-d H:i:s')."','Y')";
+				$command=Yii::app()->db->createCommand($sql_insert);
+				
+					$command->execute();
+							}
+							
+						}
+						
+						
+					}
+					$modules=implode(",",$_POST['module_id']);
+						  $sql_insert_log="INSERT INTO bo_user_privileges_logs (edited_by,action,module_id,user_id,role_id,add_action,edit_action,delete_action,created_time,remote_ip,user_agent)
+		VALUES('".$_SESSION['uid']."','assign_user_privileges','".$modules."','','".$_POST['role_id']."','".$add."','".$edit."','".$delete."','".date('Y-m-d H:i:s')."','".$_SERVER['REMOTE_ADDR']."','".$_SERVER['HTTP_USER_AGENT']."' )";
+				$command=Yii::app()->db->createCommand($sql_insert_log);
+				
+				$command->execute();
+				
+					Yii::app()->user->setFlash('Success', "Success: Privileges assigned/unassigned to selected role succesfully.");
+									 $this->redirect(array('/admin/default/managePrivileges'));
+									  exit;
+			}
+			}
+			else{
+				Yii::app()->user->setFlash('Error', "Error: Please select a role or user.");
+									 $this->redirect(array('/admin/default/managePrivileges'));
+									  exit;
+			}
+				
+		}
+		
+	}
+	public function actionUserstatus(){
+		
+		if($_REQUEST['uid']!="" && $_REQUEST['status']!=""){
+			if($_REQUEST['status']=="active" )
+			{
+				$status="1";
+				$old_status=0;
+			}
+			else if($_REQUEST['status']=="deactive"){
+				$status="0";
+				$old_status=1;
+			}
+			 $sql = "UPDATE bo_user SET is_active='".$status."' Where uid='".$_REQUEST['uid']."'";
+						  $command=Yii::app()->db->createCommand($sql);
+						  $command->execute();
+						   $sql_insert_log="INSERT INTO bo_user_logs (edited_by, action,before_edit,after_edit,remote_ip,user_agent,other_info,created_time)
+VALUES('".$_SESSION['uid']."','change_user_status','".$old_status."','".$status."','".$_SERVER['REMOTE_ADDR']."','".$_SERVER['HTTP_USER_AGENT']."','".$_REQUEST['uid']."' ,'".date('Y-m-d H:i:s')."')";
+		$command=Yii::app()->db->createCommand($sql_insert_log);
+		
+			$command->execute();
+				Yii::app()->user->setFlash('Success', "Success: User status updated succesfully.");
+									 $this->redirect(array('/admin/default/userslist'));
+									  exit;
+		}
+	}
+	public function actionGetUserPrivileges(){
+		$response=array();
+		if($_POST['id']!=""){
+			if($_POST['type']=='user'){
+			
+			 $sql = "select * from bo_user_privileges where user_id='".$_POST['id']."' and is_active='Y'";
+			}
+		else if($_POST['type']=='role'){
+			$sql = "select * from bo_user_privileges where role_id='".$_POST['id']."' and is_active='Y'";
+		}		
+			$res = Yii::app()->db->createCommand($sql)->queryAll();
+			$modules=array();
+				$action=array();
+			if(count($res)>0){
+				
+				
+				foreach($res as $value){
+					$modules[]=$value['module_id'];
+					$action['add']=$value['add_action'];
+					$action['edit']=$value['edit_action'];
+					$action['delete']=$value['delete_action'];
+				}
+				
+			}
+			$response['modules']=$modules;
+				$response['action']=$action;
+	}
+		echo json_encode($response);
+		die();
+	}
+		
+	public function actionEdituser()
+	{
+		$sql1="SELECT 
+	* from bo_user 
+		where  
+		bo_user.uid='".$_REQUEST['uid']."'";
+		$connection=Yii::app()->db; 
+		$command1=$connection->createCommand($sql1);
+		$res = $command1->queryRow();
+		if(!empty($res['uid'])){
+			$this->render('edit_user');
+		}
+		else{
+		Yii::app()->user->setFlash('Error', "Error: Invalid User.");
+									 $this->redirect(array('/admin/default/userslist'));
+									  exit;
+		}
+		//$this->render('edit_user');
+		
+	}
+	public function actionEditemailExist(){
+		
+		if(isset($_REQUEST['email']))
+		{
+			$sql = "select uid from bo_user where email='".$_REQUEST['email']."' and uid<>'".$_REQUEST['uid']."'";
+			$res = Yii::app()->db->createCommand($sql)->queryRow();
+			if($res['uid']!=""){
+				echo "dup";
+			}
+			else{
+				echo "";
+			}
+		}
+		
+		die();
+	}
+	public function actionEditmobileExists(){
+
+		if(isset($_REQUEST['mobile']) && $_REQUEST['mobile']!="")
+		{
+			$sql = "select uid from bo_user where mobile='".$_REQUEST['mobile']."' and uid<>'".$_REQUEST['uid']."'";
+			$res = Yii::app()->db->createCommand($sql)->queryRow();
+			if($res['uid']!=""){
+				echo "dup";
+			}
+			else{
+				echo "";
+			}
+		}
+		
+		die();
+	}
+	
+	public function actionUpdateUser(){
+		if(isset($_POST['email']) && $_POST['uid']!=""){
+		//$pass = hash_hmac('sha1', $_POST['password'], PASSWORD_SECRET_KEY);
+		$sql = "UPDATE bo_user SET full_name='".$_POST['full_name']."',middle_name='".$_POST['middle_name']."',last_name='".$_POST['last_name']."',email='".$_POST['email']."',email_alert='".$_POST['email']."',fax='".$_POST['fax']."',delegate_officer_number='".$_POST['delegate_officer_number']."',delegate_officer_name='".$_POST['delegate_officer_name']."',delegate_officer_email='".$_POST['delegate_officer_email']."',office_no='".$_POST['office_no']."',mobile='".$_POST['mobile']."',dept_id='1',np_user_id='',is_for_testing='N',is_active='".$_POST['is_active']."',system_user='".$_POST['system_user']."' Where uid='".$_POST['uid']."'";
+						  $command=Yii::app()->db->createCommand($sql);
+						  $command->execute();
+						  
+		
+	$sql_insert_log="INSERT INTO bo_user_logs (edited_by, action,before_edit,after_edit,remote_ip,user_agent,other_info,created_time)
+VALUES('".$_SESSION['uid']."','update_user','','','".$_SERVER['REMOTE_ADDR']."','".$_SERVER['HTTP_USER_AGENT']."','".$_POST['uid']."' ,'".date('Y-m-d H:i:s')."')";
+		$command=Yii::app()->db->createCommand($sql_insert_log);
+		
+			$command->execute();	
+			 Yii::app()->user->setFlash('Success', "Success: User updates succesfully.");
+         					 $this->redirect(array('/admin/default/userslist'));
+         					  exit;
+		}
+	}
+	
+	public function actionUsertransfer(){
+		$this->render('user_transfer');	
+	}
+}

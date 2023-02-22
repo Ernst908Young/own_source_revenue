@@ -1,0 +1,319 @@
+@media only screen and (max-width:1699px){
+	
+	ul.dashboard-menu > li a {
+	    padding: 0 15px 0 40px;
+	}
+}
+
+@media only screen and (max-width:1599px){
+
+.counter-item .data-counter {
+    padding: 18px 18px 16px 16px;
+}
+
+}
+@media only screen and (max-width:1499px){
+	
+.dashborad-inner .col-left{
+	width: 24.7%;
+}
+.dashborad-inner .col-right {
+    width: 75.3%;
+}
+ul.dashboard-menu > li a {
+    padding:15px 15px 15px 25px;
+}
+ul.dashboard-menu
+{
+	background-size: contain;
+}
+.dashboard-home .home-top {
+    padding: 55px 20px 72px;
+}
+.contemt-header {
+    padding: 23px 30px 18px 30px;
+}
+.applied-view .item-row > .iteam-td.services-name {
+    padding-left: 0;
+}
+.counter-item .data-counter .counter-icon {
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+}
+.counter-item .data-counter {
+    padding: 18px 15px 15px 15px;
+}
+.counter-item.bord-5 .data-counter, .counter-item.bord-4 .data-counter, .counter-item.bord-3 .data-counter {
+    padding-left: 15px;
+}
+.counter-left {
+    width: calc(100% - 45px);
+}
+.counter-left span {
+    font-size: 12px;
+    line-height: 16px;
+}
+.home-row > .counter-item {
+    padding: 0 7px;
+}
+}
+
+@media only screen and (max-width:1299px){
+
+	ul.dashboard-menu a span.list-icon {
+    width: 28px;
+    margin-right: 10px;
+}
+ul.dashboard-menu {
+    padding-bottom: 170px;
+}
+.dashboard-home .home-top {
+    padding: 55px 10px 72px;
+}
+.counter-item .data-counter {
+    padding: 15px 10px 15px 10px !important;
+    min-height: 95px;
+}
+.Dashboard-wrapper {
+    padding: 15px 15px;
+}
+.applied-status {
+    padding: 36px 20px 10px 20px;
+}
+}
+
+@media only screen and (max-width:1199px){
+
+.home-row > .counter-item {
+    padding: 0 10px 0px !important;
+}
+.dashborad-inner .col-right {
+    width: 100%;
+    min-height: 960px;
+}
+.dashborad-inner .col-right
+{
+	border-radius: 0px;
+}
+.contemt-header {
+    padding: 23px 20px 18px;
+}
+span.toggle-icon
+{
+	display: inline-block;
+}
+.col-left {
+    position: fixed !important;
+    z-index: 100;
+    top: 0;
+    border-radius: 0 !important;
+    left: 0;
+    width: 350px !important;
+    height: 100%;
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s all;
+}
+.Dashboard-wrapper {
+    padding: 0;
+}
+.dashborad-list .logo {
+    padding: 11px 52px 18px 22px;
+}
+.close-toggle {
+    display: block;
+    color: #0f6fb5;
+    position: absolute;
+    right: 12px;
+    font-size: 0;
+    top: 31px;
+    width: 13px;
+    height: 13px;
+    border: 2px solid #0f6fb5;
+    border-width: 2px 0 0 2px;
+    transform: rotate(-45deg);
+}
+.dashborad-inner .col-left.active-sidebar {
+    transform: translateX(0px);
+    opacity: 1;
+    visibility: visible;
+}
+html body {
+    background: #f4f9fd;
+}
+}
+@media only screen and (max-width:991px){
+
+	.home-row > .counter-item {
+    width: 33.3%;
+    padding: 0 7px 14px !important;
+}
+.counter-left span {
+    font-size: 14px;
+    line-height: 18px;
+}
+}
+@media only screen and (max-width:767px){
+
+.dashboard-home .home-top {
+    padding: 35px 10px 34px;
+    margin-bottom: 47px;
+}
+.home-row > .counter-item {
+    width: 33.3%;
+    padding: 0 7px 14px !important;
+}
+.applied-view > div {
+    padding: 20px 35px 20px 15px;
+}
+.applied-view .item-row > div.toggle-click {
+    right: 18px;
+    top: 25px;
+}
+.applied-view .item-row p {
+    font-size: 12px;
+    line-height: 20px;
+}
+.applied-view .item-row h5
+{
+	font-size: 12px;
+}
+.applied-view .iteam-td.srn-no {
+    width: 60px;
+    padding-left: 0;
+    min-width: 60px;
+    padding-right: 10px;
+}
+.applied-view .item-row > div.servoces-type {
+    width: 226px;
+    padding-right: 0;
+    padding-left: 10px;
+}
+.applied-view .item-row > div.current-status {
+    padding-left: 10px;
+    min-width: 117px;
+}
+.dashboard-home .home-top:after {
+    height: 47px;
+    background-size: 100%;
+}
+ul.dashboard-menu > li {
+    font-size: 15px;
+    line-height: 61px;
+}
+
+.summmarybox{
+    min-width: 150px;
+}
+.summmarybox h2 {
+    font-size: 35px;
+}
+.summmarybox h2 span {
+    font-size: 18px;
+}
+.filter-form select {
+    width: 135px;
+}
+.item-inside {
+    min-width: 60px;
+}
+.item-inside p {
+    font-size: 10px;
+}
+
+}
+@media only screen and (max-width:575px){
+
+.contemt-header {
+    padding: 20px 15px 15px;
+}
+.contemt-header .col-md-4.col-sm-4.col-12 {
+    order: 3;
+    margin-top: 20px;
+}
+.home-row > .counter-item {
+    width: 50%;
+    padding: 0 7px 14px !important;
+}
+.counter-left span {
+    font-size: 12px;
+    line-height: 18px;
+}
+.counter-item .data-counter .counter-icon img {
+    width: 48%;
+}
+.home-row {
+    justify-content: center;
+}
+.status-title h4 {
+    width: 100%;
+    text-align: center;
+    padding: 0 0 11px;
+}
+.serach-bar input {
+    width: 100%;
+}
+.serach-bar {
+    width: 100%;
+}
+.applied-view .item-row {
+    display: block !important;
+}
+.applied-view .item-row > div:not(:last-child) {
+    display: block;
+    text-align: center !important;
+    width: 100% !important;
+    padding: 0 0 19px !important;
+}
+.applied-view .item-row h5 {
+    font-size: 14px;
+}
+.applied-view .item-row h5 {
+    font-size: 14px;
+}
+.applied-view > div {
+    padding: 30px 20px;
+    margin: 0 0 15px;
+}
+.applied-view .item-row > div.toggle-click,
+ul.application-download .donwload-box p {
+    display: none !important;
+}
+.applied-item .toggle-open {
+    display: block;
+}
+ul.application-download .donwload-box {
+    height: 60px;
+    width: 60px;
+    line-height: 37px;
+}
+ul.application-download > li {
+    padding: 0 5px;
+}
+ul.application-download {
+    padding: 0px 0 0;
+}
+.applied-view .item-row p {
+    font-size: 14px;
+    line-height: 22px;
+}
+.applied-status {
+    padding: 36px 15px;
+}
+ul.dashboard-menu {
+    background-size: 250px !important;
+    padding-bottom: 120px !important;
+}
+
+.tabcontentbox .ticketinnerbox{
+    flex-direction: column;
+} 
+.filter-form, .tickettable .ticket-row{
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+}

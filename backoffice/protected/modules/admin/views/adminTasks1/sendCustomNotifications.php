@@ -1,0 +1,31 @@
+<div class="form-group last">
+  <label class="control-label col-md-3">Grouped Options</label>
+  <div class="col-md-9">
+    <select multiple="multiple" class="multi-select" id="my_multi_select2" name="my_multi_select2[]" style="position: absolute; left: -9999px;">
+      <optgroup label="NFC EAST">
+        <option>Dallas Cowboys</option>
+        <option>New York Giants</option>
+        <option>Philadelphia Eagles</option>
+        <option>Washington Redskins</option>
+      </optgroup>
+      <optgroup label="NFC NORTH">
+        <option>Chicago Bears</option>
+        <option>Detroit Lions</option>
+        <option>Green Bay Packers</option>
+        <option>Minnesota Vikings</option>
+      </optgroup>
+      <optgroup label="NFC SOUTH">
+        <option>Atlanta Falcons</option>
+        <option>Carolina Panthers</option>
+        <option>New Orleans Saints</option>
+        <option>Tampa Bay Buccaneers</option>
+      </optgroup>
+      <optgroup label="NFC WEST">
+        <option>Arizona Cardinals</option>
+        <option>St. Louis Rams</option>
+        <option>San Francisco 49ers</option>
+        <option>Seattle Seahawks</option>
+      </optgroup>
+    </select><div class="ms-container" id="ms-my_multi_select2"><div class="ms-selectable"><ul class="ms-list" tabindex="-1"><li class="ms-optgroup-container" id="optgroup-selectable--1849172622"><ul class="ms-optgroup"><li class="ms-optgroup-label"><span>NFC EAST</span></li><li class="ms-elem-selectable" id="823795905-selectable"><span>Dallas Cowboys</span></li><li class="ms-elem-selectable" id="-1890721249-selectable"><span>New York Giants</span></li><li class="ms-elem-selectable" id="-1518976198-selectable"><span>Philadelphia Eagles</span></li><li class="ms-elem-selectable" id="-2136494795-selectable"><span>Washington Redskins</span></li></ul></li><li class="ms-optgroup-container" id="optgroup-selectable--1481048560"><ul class="ms-optgroup"><li class="ms-optgroup-label"><span>NFC NORTH</span></li><li class="ms-elem-selectable" id="980502473-selectable"><span>Chicago Bears</span></li><li class="ms-elem-selectable" id="-1131466254-selectable"><span>Detroit Lions</span></li><li class="ms-elem-selectable" id="185217194-selectable"><span>Green Bay Packers</span></li><li class="ms-elem-selectable" id="-383954085-selectable"><span>Minnesota Vikings</span></li></ul></li><li class="ms-optgroup-container" id="optgroup-selectable--1476428072"><ul class="ms-optgroup"><li class="ms-optgroup-label"><span>NFC SOUTH</span></li><li class="ms-elem-selectable" id="-1425646635-selectable"><span>Atlanta Falcons</span></li><li class="ms-elem-selectable" id="-1522070806-selectable"><span>Carolina Panthers</span></li><li class="ms-elem-selectable" id="-738330712-selectable"><span>New Orleans Saints</span></li><li class="ms-elem-selectable" id="-2076057386-selectable"><span>Tampa Bay Buccaneers</span></li></ul></li><li class="ms-optgroup-container" id="optgroup-selectable--1848632540"><ul class="ms-optgroup"><li class="ms-optgroup-label"><span>NFC WEST</span></li><li class="ms-elem-selectable" id="-2094873869-selectable"><span>Arizona Cardinals</span></li><li class="ms-elem-selectable" id="247588396-selectable"><span>St. Louis Rams</span></li><li class="ms-elem-selectable" id="-1874552895-selectable"><span>San Francisco 49ers</span></li><li class="ms-elem-selectable" id="-1391821265-selectable"><span>Seattle Seahawks</span></li></ul></li></ul></div><div class="ms-selection"><ul class="ms-list" tabindex="-1"><li class="ms-optgroup-container" id="optgroup-selection--1849172622"><ul class="ms-optgroup"><li class="ms-optgroup-label" style="display: none;"><span>NFC EAST</span></li><li class="ms-elem-selection" id="823795905-selection" style="display: none;"><span>Dallas Cowboys</span></li><li class="ms-elem-selection" id="-1890721249-selection" style="display: none;"><span>New York Giants</span></li><li class="ms-elem-selection" id="-1518976198-selection" style="display: none;"><span>Philadelphia Eagles</span></li><li class="ms-elem-selection" id="-2136494795-selection" style="display: none;"><span>Washington Redskins</span></li></ul></li><li class="ms-optgroup-container" id="optgroup-selection--1481048560"><ul class="ms-optgroup"><li class="ms-optgroup-label" style="display: none;"><span>NFC NORTH</span></li><li class="ms-elem-selection" id="980502473-selection" style="display: none;"><span>Chicago Bears</span></li><li class="ms-elem-selection" id="-1131466254-selection" style="display: none;"><span>Detroit Lions</span></li><li class="ms-elem-selection" id="185217194-selection" style="display: none;"><span>Green Bay Packers</span></li><li class="ms-elem-selection" id="-383954085-selection" style="display: none;"><span>Minnesota Vikings</span></li></ul></li><li class="ms-optgroup-container" id="optgroup-selection--1476428072"><ul class="ms-optgroup"><li class="ms-optgroup-label" style="display: none;"><span>NFC SOUTH</span></li><li class="ms-elem-selection" id="-1425646635-selection" style="display: none;"><span>Atlanta Falcons</span></li><li class="ms-elem-selection" id="-1522070806-selection" style="display: none;"><span>Carolina Panthers</span></li><li class="ms-elem-selection" id="-738330712-selection" style="display: none;"><span>New Orleans Saints</span></li><li class="ms-elem-selection" id="-2076057386-selection" style="display: none;"><span>Tampa Bay Buccaneers</span></li></ul></li><li class="ms-optgroup-container" id="optgroup-selection--1848632540"><ul class="ms-optgroup"><li class="ms-optgroup-label" style="display: none;"><span>NFC WEST</span></li><li class="ms-elem-selection" id="-2094873869-selection" style="display: none;"><span>Arizona Cardinals</span></li><li class="ms-elem-selection" id="247588396-selection" style="display: none;"><span>St. Louis Rams</span></li><li class="ms-elem-selection" id="-1874552895-selection" style="display: none;"><span>San Francisco 49ers</span></li><li class="ms-elem-selection" id="-1391821265-selection" style="display: none;"><span>Seattle Seahawks</span></li></ul></li></ul></div></div>
+  </div>
+</div>

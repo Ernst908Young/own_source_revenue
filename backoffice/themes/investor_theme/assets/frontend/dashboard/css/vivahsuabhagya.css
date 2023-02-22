@@ -1,0 +1,411 @@
+
+/* 
+///////////////////////////////////////////////////
+9.0 FOOTERS
+///////////////////////////////////////////////////
+*/
+.vivah-footer-style-1,
+.vivah-footer-style-2,
+.vivah-footer-style-3 {
+  padding: 2em 0 1em;
+}
+@media screen and (max-width: 768px) {
+  .vivah-footer-style-1,
+  .vivah-footer-style-2,
+  .vivah-footer-style-3 {
+    padding: 1em 0;
+  }
+}
+
+.vivah-footer-style-1 {
+  padding-top: 0;
+  padding-bottom: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.vivah-footer-style-1 .p-b {
+  padding-bottom: 20px;
+}
+.vivah-footer-style-1 .vivah-subscribe {
+  padding: 7em 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+}
+.vivah-footer-style-1 .vivah-subscribe > .vivah-overlay {
+  position: absolute;
+  background: #000;
+  opacity: .45;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.vivah-footer-style-1 .vivah-subscribe .form {
+  position: relative;
+  z-index: 3;
+}
+.vivah-footer-style-1 .vivah-subscribe .form h2 {
+  color: #fff;
+}
+.vivah-footer-style-1 .vivah-subscribe .form p {
+  color: rgba(255, 255, 255, 0.8);
+}
+.vivah-footer-style-1 .vivah-subscribe .form p:last-child {
+  margin-bottom: 0;
+}
+.vivah-footer-style-1 .vivah-subscribe .form-group {
+  position: relative;
+}
+.vivah-footer-style-1 .vivah-subscribe .form-group i {
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  margin-top: -10px;
+  color: #fff;
+}
+.vivah-footer-style-1 .vivah-subscribe .form-control {
+  padding-left: 45px;
+  padding-right: 30px;
+  box-shadow: none;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  height: 52px;
+  color: #fff;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.vivah-footer-style-1 .vivah-subscribe .form-control::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.vivah-footer-style-1 .vivah-subscribe .form-control:-moz-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.vivah-footer-style-1 .vivah-subscribe .form-control::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.vivah-footer-style-1 .vivah-subscribe .form-control:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.vivah-footer-style-1 .vivah-subscribe .form-control:focus, .vivah-footer-style-1 .vivah-subscribe .form-control:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+.vivah-footer-style-1 .vivah-subscribe .btn {
+  margin-top: 3px;
+  height: 52px;
+}
+.vivah-footer-style-1 .vivah-footer-inner {
+  padding: 7em 0;
+  font-family: "Open Sans", Arial, sans-serif;
+}
+.vivah-footer-style-1 .vivah-footer-inner .copyright {
+  margin-bottom: 20px !important;
+  line-height: 1.5;
+}
+.vivah-footer-style-1 .vivah-footer-inner .vivah-logo {
+  margin-bottom: 20px;
+}
+.vivah-footer-style-1 .vivah-footer-inner .vivah-logo a {
+  padding: 15px 15px;
+  background: rgba(0, 0, 0, 0.07);
+  font-size: 40px;
+  color: #4d4d4d;
+  font-weight: 700;
+  display: -moz-inline-stack;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  font-family: "Montserrat", Arial, sans-serif;
+}
+.vivah-footer-style-1 .vivah-footer-inner .vivah-logo a:hover, .vivah-footer-style-1 .vivah-footer-inner .vivah-logo a:focus {
+  text-decoration: none;
+}
+.vivah-footer-style-1 .vivah-footer-inner h3 {
+  font-size: 19px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  font-family: "Open Sans", Arial, sans-serif;
+}
+.vivah-footer-style-1 .vivah-footer-inner p {
+  color: #b3b3b3;
+  font-size: 15px;
+  font-weight: 40;
+  font-family: "Open Sans", Arial, sans-serif;
+}
+.vivah-footer-style-1 .vivah-footer-inner p:last-child {
+  margin-bottom: 0;
+}
+.vivah-footer-style-1 .vivah-footer-inner .links {
+  padding: 0;
+  margin: 0 0 20px 0;
+  font-size: 15px;
+}
+.vivah-footer-style-1 .vivah-footer-inner .links li {
+  list-style: none;
+  font-family: "Open Sans", Arial, sans-serif;
+}
+.vivah-footer-style-1 .vivah-footer-inner .links li a {
+  font-size: 14px;
+  color: gray;
+}
+.vivah-footer-style-1 .vivah-footer-inner .links li a:hover {
+  text-decoration: none;
+  color: #1784fb;
+}
+.vivah-footer-style-1 .vivah-footer-inner .vivah-social {
+  text-align: right;
+  margin-top: 0;
+}
+@media screen and (max-width: 768px) {
+  .vivah-footer-style-1 .vivah-footer-inner .vivah-social {
+    text-align: left;
+  }
+}
+.vivah-footer-style-1 .vivah-footer-inner .vivah-social a {
+  margin-right: 15px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #333333;
+}
+.vivah-footer-style-1 .vivah-footer-inner .vivah-social a:hover {
+  text-decoration: none;
+  color: #1784fb;
+}
+
+.vivah-footer-style-2 {
+  background: #232939;
+}
+.vivah-footer-style-2 .vivah-logo {
+  color: #fff;
+  font-size: 24px;
+  font-family: "Montserrat", Arial, sans-serif;
+  margin-bottom: 0px;
+}
+@media screen and (max-width: 480px) {
+  .vivah-footer-style-2 .vivah-logo {
+    text-align: center;
+  }
+}
+.vivah-footer-style-2 .vivah-logo > span {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+}
+@media screen and (max-width: 768px) {
+  .vivah-footer-style-2 .vivah-logo > span {
+    display: block;
+  }
+}
+.vivah-footer-style-2 a {
+  color: rgba(255, 255, 255, 0.5);
+}
+.vivah-footer-style-2 a:hover {
+  color: white;
+}
+.vivah-footer-style-2 .footer-style-2-link {
+  text-align: right;
+}
+.vivah-footer-style-2 .footer-style-2-link > a {
+  display: none;
+}
+@media screen and (max-width: 992px) {
+  .vivah-footer-style-2 .footer-style-2-link {
+    text-align: left;
+  }
+}
+.vivah-footer-style-2 .footer-style-2-link ul {
+  padding: 0;
+  margin: 0;
+}
+@media screen and (max-width: 480px) {
+  .vivah-footer-style-2 .footer-style-2-link ul {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 768px) {
+  .vivah-footer-style-2 .footer-style-2-link ul {
+    margin-bottom: 20px;
+  }
+}
+.vivah-footer-style-2 .footer-style-2-link ul li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: inline;
+}
+@media screen and (max-width: 480px) {
+  .vivah-footer-style-2 .footer-style-2-link ul li {
+    display: block;
+  }
+}
+.vivah-footer-style-2 .footer-style-2-link ul li a {
+  margin-right: 10px;
+  color: rgba(255, 255, 255, 0.5);
+}
+@media screen and (max-width: 480px) {
+  .vivah-footer-style-2 .footer-style-2-link ul li a {
+    padding: 4px 0;
+    display: block;
+  }
+}
+.vivah-footer-style-2 .footer-style-2-link ul li a:hover {
+  color: white;
+}
+
+.vivah-footer-style-3 {
+  background: #f9edf2;
+  font-size: 15px;
+}
+.vivah-footer-style-3 .vivah-footer-widget {
+  margin-bottom: 30px;
+}
+.vivah-footer-style-3 .vivah-logo {
+  color: #d10959;
+  font-size: 18px;
+  font-family: "Montserrat", Arial, sans-serif;
+  margin-bottom: 40px;
+}
+.vivah-footer-style-3 .vivah-logo .logo {
+  padding: 7px 0px;
+  background: rgba(255, 255, 255, 0.1);
+  display: -moz-inline-stack;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  border-radius: 7px;
+}
+.vivah-footer-style-3 .vivah-copyright {
+  font-size: 15px;
+}
+.vivah-footer-style-3 h3 {
+  color: #1a1a1a;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 15px;
+  margin-bottom: 18px;
+}
+@media screen and (max-width: 768px) {
+  .vivah-footer-style-3 h3 {
+    margin-bottom: 20px;
+  }
+}
+.vivah-footer-style-3 p {
+  color: #1a1a1a;
+}
+.vivah-footer-style-3 a {
+  color: #1a1a1a;
+}
+.vivah-footer-style-3 a:hover {
+  color: #d10959;
+}
+.vivah-footer-style-3 .btn {
+  border-color: rgba(255, 255, 255, 0.1);
+  color: gray;
+}
+.vivah-footer-style-3 .vivah-links {
+  padding: 0;
+  margin: 0;
+}
+.vivah-footer-style-3 .vivah-links li {
+  padding: 0;
+  margin: 0 0 10px 0;
+  list-style: none;
+}
+.vivah-footer-style-3 .vivah-links.vivah-social .icon {
+  font-size: 17px;
+  margin-right: 5px;
+  top: 2px;
+  position: relative;
+  display: -moz-inline-stack;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+.vivah-footer-style-3 .vivah-made {
+  text-align: center;
+  border-top: 1px solid #cd97ad;
+  padding-top: 1em;
+}
+.vivah-footer-style-3 .vivah-made p {
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 20px;
+}
+.vivah-footer-style-3 .vivah-made p:last-child {
+  margin-bottom: 0;
+}
+.vivah-footer-style-3 .vivah-made p .heart {
+  color: #fb4f59;
+}
+
+
+
+/*****START:MODEL POPOP CENTER ALIGN*************/
+.modal-dialog {
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.modal-header {
+    min-height: auto;
+}
+
+.modal.fade .modal-dialog {
+  -webkit-transform: translate(0, -100%);
+          transform: translate(0, -100%);
+}
+.modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+/*****END:MODEL POPOP CENTER ALIGN*************/
+
+/********SCROLLBAR STYLING************/
+::-webkit-scrollbar {width: 6px !important;}
+::-webkit-scrollbar-thumb {/*border-radius: 10px;*/background-color: #ec5a62;}
+::-webkit-scrollbar-track {webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.3);border-radius: 0px; background-color: #ccc;}
+
+::-moz-scrollbar {width: 6px !important;;}
+::-moz-scrollbar-thumb {border-radius: 10px;background-color: #ec5a62;}
+::-moz-scrollbar-track {webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.3);border-radius: 0px;}
+
+/********POPOVER*******************/
+ .popover{max-width: 400px;margin-right:500px !important;position: fixed; left: 670px;} 
+.popup-box{
+	display: none;
+	position: fixed;
+	bottom: 0px;
+	right: 280px;
+	height: 325px;
+	background-color: #fff;
+	width: 280px;
+	border: 1px solid rgba(29, 49, 91, .3);
+}

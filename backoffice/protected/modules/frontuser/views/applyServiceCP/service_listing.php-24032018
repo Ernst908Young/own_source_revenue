@@ -1,0 +1,322 @@
+<?php
+// @SANTOSH FOR Offline/Online
+// Date - 24-10-2017
+
+//echo '<pre>'; print_r($res_s); die;
+$pre_service_id_arr = false;
+if($res_s){
+	//echo '<pre>'; print_r($res_s);
+	$pre_service_id = $res_s[0]['pre_service_id'];
+	$pre_service_id_arr = json_decode($pre_service_id,true);
+	
+}
+/*if(!isset($_GET['department_id'])){
+	$department_id = $_GET['department_id'];
+}else{
+	$department_id=NULL;
+}*/
+
+// echo '<!-- <pre>'; print_r($res_d); echo ' -->';
+?>
+<style>
+a:hover{ color:#000;}
+.mdl{vertical-align:middle !important;}
+.cent{text-align:center !important;}
+.left{text-align:left !important;}
+</style>
+<div class="row" style="margin:10px 0 10px 0;">
+<form action="/backoffice/frontuser/ApplyServiceCP/ServiceListing" method="GET">
+<div class="col-sm-4">	
+<select name="department_id" class="form-control" required onchange="getServiceByDepartment(this.value)">
+	<option value="">Select Department</option>
+	<?php if($res_dep)foreach($res_dep as $dep_arr){ 
+		
+	?>
+	<option value="<?php echo $dep_arr['issuerby_id']; ?>" <?php if($department_id == $dep_arr['issuerby_id']){echo 'selected';} ?>>
+	<?php echo $dep_arr['name']; ?>
+	</option>
+	<?php } ?>
+</select>
+</div>
+
+<div class="col-sm-4" id="final_service_id_div">	
+<select name="final_service_id" class="form-control" required>
+	<option value="">Select Service</option>
+	<?php if($res_d)foreach($res_d as $dep_arr){ 
+		$service_id 	= $dep_arr['service_id'];
+		$sub_service_id = $dep_arr['servicetype_additionalsubservice'];
+		$final_id = $service_id.".".$sub_service_id;
+	?>
+	<option value="<?php echo $final_id; ?>" <?php if($id == $final_id){echo 'selected';} ?>>
+	<?php echo $final_id; ?> - 
+	<?php echo $dep_arr['core_service_name']; ?>
+	</option>
+	<?php } ?>
+</select>
+</div>
+<div class="col-sm-3">
+<select name="caf_id" class="form-control" required>
+	<option value="">Select Approved CAF</option>
+	<?php if($res_caf)foreach($res_caf as $keyc=>$caf_arr){ ?>
+		<option value="<?php echo $caf_arr['submission_id'];?>" <?php if($caf_id == $caf_arr['submission_id']){echo 'selected';} ?>>CAF ID - <?php echo $caf_arr['submission_id'];?></option>
+	<?php } ?>
+</select>
+</div>
+<div class="col-sm-1">
+   <input type="submit" value="Submit" class="btn btn-primary">
+</div>
+</form>
+</div>
+
+<?php if(isset($_GET['final_service_id'])){ echo '<div class="row" style="margin:10px 0 10px 0;">';
+    list($final_service_id,$final_sub_service_id) = explode(".",$_GET['final_service_id']);
+	$fee_arr = getFeeServiceDatasFromInfowiz($final_service_id,$final_sub_service_id);
+	if(isset($fee_arr['upload_fee_structure']) && $fee_arr['upload_fee_structure']!=''){
+	?>
+	<a href="<?php echo $fee_arr['upload_fee_structure']; ?>" target="_blank">Click here to view fee</a>
+	<?php }else{ ?>
+	<?php } echo '</div>';} ?>
+
+<section class="panel site-min-height" style="display:">
+  <header class="panel-heading">
+	  Sectorial SWCS Services
+  </header>
+  
+    <div class="panel-body">
+	<div class="table">
+	<table class="table table-bordered" width="100%">
+       <thead>
+		  <tr>
+			<th class="mdl cent" style="width:5%">ID</th>
+			<th class="mdl left" style="width:25%;">Department</th>
+			<th class="mdl left" style="width:25%">Service Name</th>
+			<th class="mdl cent" style="width:10%;">Is Mandatory</th>
+			<th class="mdl cent" style="width:10%;">CAF ID</th>
+			<th class="mdl cent" style="width:10%;">Applied Status</th>
+			<th class="mdl cent" style="width:5%;">Fee</th>
+			<th class="mdl cent" style="width:10%">Action</th>
+		  </tr>
+		</thead>
+		<tbody>
+			<?php 
+							
+					$disabled_btn=false;		
+							if($pre_service_id_arr){foreach($pre_service_id_arr as $key=>$data_arr_new){
+								list($service_id,$sub_service_id) = explode(".",$data_arr_new['mapped_service_id']);
+								$data_arr = getServiceDatasFromInfowizWithDepartment($service_id,$sub_service_id);
+								$service_id 	= $data_arr['service_id'];
+								$sub_service_id = $data_arr['servicetype_additionalsubservice'];
+								if($data_arr['is_integrated_with_swcs'] == 'Y'){
+									$swcs_department_id = $data_arr['department_id'];
+									$swcs_service_id = $data_arr['swcs_service_id'];
+								}else{
+									$swcs_department_id = false;
+									$swcs_service_id = false;
+								}
+								if($data_arr['core_service_name']!=''){
+							?>
+							<form action="/backoffice/frontuser/ApplyService/DocumentsChecklist/" method="GET" target="_blank">
+							<input type="hidden" name="service_id" value='<?php echo $service_id; ?>' />
+                            <input type="hidden" name="sub_service_id" value='<?php echo $sub_service_id; ?>' />
+                            <input type="hidden" name="department_id" value='<?php echo $id; ?>' />
+                            <input type="hidden" name="swcs_department_id" value='<?php echo $swcs_department_id; ?>' />
+                            <input type="hidden" name="swcs_service_id" value='<?php echo $swcs_service_id; ?>' />
+                            <input type="hidden" name="new_name" value='<?php echo $data_arr['core_service_name']; ?>' />
+                            <input type="hidden" name="caf_id" value='<?php echo $caf_id; ?>' />
+							
+							<tr>
+							<td class="mdl cent"><?php echo $service_id.".".$sub_service_id; ?></td>
+							<td class="mdl left"><?php echo $data_arr['department_name']; ?></td>
+							<td class="mdl left"><?php echo $data_arr['core_service_name']; ?></td>
+							<td class="mdl cent"><?php echo $data_arr_new['is_required']; ?></td>
+							<td class="mdl cent">
+							<?php
+								$offline_flag	=0;
+								$online_flag	=0;
+								$swcs_flag		=0;
+								
+								$is_online 					= $data_arr['is_online'];
+								$is_integrated_with_swcs 	= $data_arr['is_integrated_with_swcs'];
+								if($is_online=='N'){
+									$status_text = "Offline";
+									$offline_flag	=1;
+									$online_flag	=0;
+									$swcs_flag		=0;
+								}else if($is_online == 'Y' && $is_integrated_with_swcs=='Y'){
+									$status_text = "Integrated With SWCS";
+									$offline_flag	=0;
+									$online_flag	=0;
+									$swcs_flag		=1;
+								}else if($is_online=='Y' && $is_integrated_with_swcs == 'N'){
+									$status_text = "Online";
+									$offline_flag	=0;
+									$online_flag	=1;
+									$swcs_flag		=0;
+								}
+								// echo $status_text;
+								echo $caf_id;
+							?>
+							</td>
+							<td class="mdl cent">
+							<?php 
+									$required_text ='';
+									$blank ='';
+									if($offline_flag == 1){
+										$required_text = 'required';
+									}
+									$caf_dropdown = '<select name="caf_id" class="form-control" '.$required_text.'>
+										<option value="'.$blank.'">Select Approved CAF</option>';
+										if($res_caf)foreach($res_caf as $keyc=>$caf_arr){
+											//$caf_dropdown .= '<option value="'.$caf_arr['submission_id'].'">CAF ID - '.$caf_arr['submission_id'].'</option>';
+											if($caf_arr['application_id'] == 1){
+											$caf_dropdown .= '<option value="'.$caf_arr['submission_id'].'">CAF ID - '.$caf_arr['submission_id'].'</option>';
+											}else if($caf_arr['application_id'] == 11){
+											$caf_dropdown .= '<option value="'.$caf_arr['submission_id'].'">EU - '.$caf_arr['submission_id'].'</option>';
+											}
+										}
+									$caf_dropdown .= '</select>';
+									
+									//if($swcs_flag == 1 || $offline_flag == 1){ echo $caf_dropdown; } 
+									$applied_services_flag = getAppliedServiceStatus($user_id,$swcs_service_id,$caf_id);
+									if($applied_services_flag == false){
+										echo 'Not Applied Yet';
+									}else{
+										echo 'Applied';
+										$swcs_flag=0;
+									}
+									
+									if($data_arr_new['is_required'] == 'Y' && $applied_services_flag == false){
+										$disabled_btn=true;
+									}
+							?>
+							</td>
+							<td class="mdl cent">
+							<?php 
+							$fee_arr = getFeeServiceDatasFromInfowiz($service_id,$sub_service_id);
+							if(isset($fee_arr['upload_fee_structure']) && $fee_arr['upload_fee_structure']!=''){
+							?>
+							<a href="<?php echo $fee_arr['upload_fee_structure']; ?>" target="_blank">YES</a>
+							<?php }else{ ?>
+							N.A
+							<?php } ?>
+							</td>
+							<?php
+								$mapped_docs = json_decode($data_arr['document_checklist_creation'],true);
+								
+							?>
+							<!-- <td> <a onclick="openDMSPopup('<?php echo $service_id;?>','<?php echo $sub_service_id;?>')">View</a><?php //echo '<pre>'; print_r($mapped_docs); ?></td> -->
+							<td class="mdl cent">
+							<?php
+							if($online_flag == 1){
+								//echo '<a target="_blank" href="'.$data_arr['service_url'].'">Apply Now</a>';
+							}else if($offline_flag == 1){
+								//echo '<button type="submit" class="btn btn-success">Apply Now</button>';
+							}else if($swcs_flag == 1){
+								//echo "N.A";
+								echo '<button type="submit" class="btn btn-success">Apply Now</button>';
+							}
+							?>
+							
+							
+							</td>
+							
+							
+							</tr>
+							<input type="hidden" name="type" value='<?php echo $status_text; ?>' />
+							</form>
+							<?php }} 
+								
+								if(isset($_GET['final_service_id'])){
+									list($final_service_id,$final_sub_service_id) = explode(".",$_GET['final_service_id']);
+									$final_data_arr = getServiceDatasFromInfowiz($final_service_id,$final_sub_service_id);
+									if($final_data_arr['is_integrated_with_swcs'] == 'Y'){
+										$final_swcs_department_id = $final_data_arr['department_id'];
+										$final_swcs_service_id = $final_data_arr['swcs_service_id'];
+									}else{
+										$final_swcs_department_id = false;
+										$final_swcs_service_id = false;
+									}
+							?>
+							<form action="/backoffice/frontuser/ApplyService/DocumentsChecklist/" method="GET" target="_blank">
+							<input type="hidden" name="service_id" value='<?php echo $final_service_id; ?>' />
+                            <input type="hidden" name="sub_service_id" value='<?php echo $final_sub_service_id; ?>' />
+                            <input type="hidden" name="department_id" value='<?php echo $final_service_id; ?>' />
+                            <input type="hidden" name="swcs_department_id" value='<?php echo $final_swcs_department_id; ?>' />
+                            <input type="hidden" name="swcs_service_id" value='<?php echo $final_swcs_service_id; ?>' />
+                            <input type="hidden" name="new_name" value='<?php echo $final_data_arr['core_service_name']; ?>' />
+                            <input type="hidden" name="caf_id" value='<?php echo $caf_id; ?>' />
+							<tr><td colspan="7" align="center">
+							<?php if($disabled_btn == false && $caf_id>0){ ?>
+							<button type="submit" class="btn btn-success">Apply Now</button>
+							<?php }else{ ?>
+								<p style="color:red; font-size:16px; font-weight:bold;">
+									You have not applied for all prerequisite services. Please apply for services as indicated in the above table.
+								</p>
+							<?php } ?>
+							</td>
+							</form>
+							<?php }} ?>
+		</tbody>
+	</table>
+</section>
+<script type="text/javascript">
+function goToNextPage(service_id,sub_service_id,caf_id){
+	window.location.href='/backoffice/frontuser/ApplyService/DocumentsChecklist/service_id/'+service_id+'/sub_service_id/'+sub_service_id+'/caf_id/'+caf_id;
+}
+
+function getServiceByDepartment(id){
+	$.ajax({
+		type: "POST",
+		url: "/backoffice/frontuser/ApplyServiceCP/GetServiceListingAjax/id/"+id,
+		success:  function(data) { 
+		   $('#final_service_id_div').html(data);
+		},
+		error:function(jqXHR, textStatus, errorThrown){
+			alert('Error::'+errorThrown);
+		}
+	});
+}
+</script>
+<?php
+function getServiceDatasFromInfowiz($service_id,$sub_service_id){
+	$sql_s="SELECT * FROM bo_information_wizard_service_parameters as sp  
+	WHERE sp.service_id='$service_id' AND sp.servicetype_additionalsubservice='$sub_service_id'  ORDER BY sp.id DESC LIMIT 1";
+	$connection=Yii::app()->db; 
+	$command=$connection->createCommand($sql_s);
+	$res_s = $command->queryRow();
+	return $res_s;
+}
+
+function getServiceDatasFromInfowizWithDepartment($service_id,$sub_service_id){
+	/*$sql_s="SELECT * FROM bo_information_wizard_service_parameters as sp  
+	WHERE sp.service_id='$service_id' AND sp.servicetype_additionalsubservice='$sub_service_id'  ORDER BY sp.id DESC LIMIT 1";*/
+	$sql_s = "SELECT sp.*,m.name as department_name FROM bo_information_wizard_service_parameters as sp
+				INNER JOIN bo_information_wizard_service_master as sm ON sm.id=sp.service_id
+				INNER JOIN bo_infowizard_issuerby_master as m ON sm.issuerby_id=m.issuerby_id WHERE sp.service_id='$service_id' AND sp.servicetype_additionalsubservice='$sub_service_id' ORDER BY sp.id DESC LIMIT 1";
+	$connection=Yii::app()->db; 
+	$command=$connection->createCommand($sql_s);
+	$res_s = $command->queryRow();
+	return $res_s;
+}
+
+function getFeeServiceDatasFromInfowiz($service_id,$sub_service_id){
+	$sql_s="SELECT * FROM bo_information_wizard_service_fee as f  
+	WHERE f.service_id='$service_id' AND f.servicetype_additionalsubservice='$sub_service_id'  ORDER BY f.id DESC LIMIT 1";
+	$connection=Yii::app()->db; 
+	$command=$connection->createCommand($sql_s);
+	$res_s = $command->queryRow();
+	if(count($res_s)>0)
+		return $res_s;
+	return false;
+}
+
+function getAppliedServiceStatus($user_id,$swcs_service_id,$caf_id){
+	$sql_s="SELECT * FROM bo_sp_applications WHERE sp_app_id='$swcs_service_id' AND caf_id='$caf_id' AND user_id='$user_id' AND app_status !='I' ORDER BY sno ASC";
+	$connection=Yii::app()->db; 
+	$command=$connection->createCommand($sql_s);
+	$res_s = $command->queryAll();
+	if(count($res_s)>0)
+		return $res_s;
+	return false;
+}
+?>

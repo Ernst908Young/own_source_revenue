@@ -1,0 +1,101 @@
+<style type="text/css">
+  .latabv {
+    border: 1px solid black;
+  }
+</style>
+<table style="padding-top: 10px;">
+    <tr>
+        <td style="text-align:center;">
+            <span style="font-size: 13;">SOCIETIES WITH RESTRICTED LIABILITY ACT OF BARBADOS</span>
+        </td>
+    </tr>
+    
+    <tr>
+        <td style="text-align:center;">
+            <span style="font-size: 14;"><strong>CONSENT TO ACT AS REGISTERED AGENT</strong></span>
+        </td>
+    </tr>
+</table>
+
+<br><br>
+<table style="border-collapse: collapse; ">
+    <tr>
+        <td><strong>We </strong>
+	<?php $midname = !empty($fieldValues['UK-FCL-00105_0']) ? ' '.$fieldValues['UK-FCL-00105_0'] : '';?>
+	<?php  echo @$fieldValues['UK-FCL-00132_0'].''.$midname.' '.@$fieldValues['UK-FCL-00106_0'].'<strong> | </strong>'. @$fieldValues['UK-FCL-00476_0']; ?></td>
+    </tr>
+    <tr>
+        <td style="text-align: center;"><strong>(Name and Address Registered Agent)</strong></td>
+    </tr>
+    <tr>
+        <td><strong>of</strong></td>
+    </tr>
+    
+    <tr>
+        <td><strong>hereby consent to act as the Registered Agent for</strong></td>
+    </tr>
+    <tr>
+        <td><strong>pursuant to the Appointment of Registered Agent dated the</strong></td>
+    </tr>
+    <tr>
+        <td><strong>filed herewith.</strong><br><br><br></td>
+    </tr>
+    <!--tr>
+        <td><strong>Dated this day of , </strong></td>
+    </tr>
+    
+    <tr>
+        <td width="50%"><strong>Electronically signed</strong></td>
+        <td width="50%"><strong>Per:</strong></td>
+    </tr>
+	
+    <tr>
+        <td width="70%"><strong>WITNESS:</strong></td>
+        <td width="30%"><strong>(Signature of Registered Agent)</strong></td>
+    </tr>
+    <tr>
+        <td><strong>Address:</strong></td>
+    </tr>
+    <tr>
+        <td><strong>Occupation:</strong></td>
+    </tr-->
+
+    <br><br><br>
+    <?php if($app_status=='A'){ 
+   echo $this->renderPartial('/subForm/documents_on_pdf',['app_id'=>$app_id]);
+ } ?>
+
+ <br><br><br>
+    <table style="border-collapse: collapse; ">
+      <tr>
+         <td style="text-align:center;">
+            <span><strong> SIGNATORY DETAILS</strong></span>           
+         </td>
+      </tr>
+     <br>
+       <tr>
+         <td>
+      <table style="padding: 5px;">
+         <tr nobr="true">
+            <th class="latabv"><strong>Full Name</strong></th>           
+            <th class="latabv"><strong>Designation </strong></th>
+            <th class="latabv"><strong>Signature </strong></th>
+            <th class="latabv"><strong>Date of Signature </strong></th>
+         </tr>
+         <?php        
+          if(isset($signatoryDetails) && count($signatoryDetails) > 0){
+            foreach ($signatoryDetails as $key => $signDetails) {
+              $signDate=date('d M,Y',strtotime($signDetails['date_of_signing']));
+              echo '<tr nobr="true">
+                      <td class="latabv">'.$signDetails['first_name'].' '.$signDetails['middle_name'].' '.$signDetails['last_name'].'</td>
+                      <td class="latabv">'.$signDetails['designation'].'</td>
+                      <td class="latabv">Electronically signed</td>
+                      <td class="latabv">'.$signDate.'</td>
+                  </tr>';
+            }
+          }
+         ?>         
+      </table>
+    </td>
+  </tr>
+</table>

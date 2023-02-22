@@ -1,0 +1,63 @@
+.inner-header{
+	background:url(../images/inner_hd_bg.jpg) no-repeat center center;
+	background-size:cover;
+	padding:30px 0;
+	color:#fff;
+}
+.inner-header h2{
+	font-size:25px;
+	font-weight:bold;
+	position:relative;
+	padding-left:15px;
+	margin-bottom:8px;
+}
+.inner-header h2::before{
+	position:absolute;
+	left:0;
+	top:0;
+	width:5px;
+	height:100%;
+	content:"";
+	background:#f05518;
+}
+.inner-header-breadcrum{
+	list-style-type:none;
+	margin:0;
+	padding:0 0 0 15px;
+	font-size:12px;
+}
+.inner-header-breadcrum li{
+	list-style-type:none;
+	margin:0 15px 0 0;
+	padding:0;
+	display: inline-block;
+	position:relative;
+}
+.inner-header-breadcrum li::after{
+	position:absolute;
+	right: -11px;
+	top: -2px;
+	width:5px;
+	height:100%;
+	content:"/";
+	color:#fff;
+	font-size:14px;
+}
+.inner-header-breadcrum li:last-child{
+	margin-right:0;
+}
+.inner-header-breadcrum li:last-child::after{
+	display:none;
+}
+.inner-header-breadcrum li a{
+	color:#fff !important;
+}
+.f20{
+	font-size:20px;
+	font-weight:bold;
+}
+.inner-contents-white-hding{
+	font-size:18px;
+	font-weight:bold;
+	margin:0 0 10px;
+}

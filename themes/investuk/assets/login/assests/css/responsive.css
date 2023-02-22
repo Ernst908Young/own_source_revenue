@@ -1,0 +1,86 @@
+@media only screen and (max-width: 767px) {
+    .d-flex {
+      flex-direction: column;
+    }
+  
+    header .top_bar .d-flex {
+      flex-direction: row;
+    }
+  
+    header .top_bar .btn {
+      margin-bottom: 10px;
+    }
+  
+    .banner_content {
+      display: none;
+    }
+  
+    .logo {
+      font-size: 14px;
+    }
+  
+    .logosubheading {
+      display: none;
+    }
+  
+    .slick-prev,
+    .slick-next {
+      display: none !important;
+    }
+    .footerbox {
+      width: 100%;
+    }
+    .social-share {
+      flex-direction: row;
+      justify-content: center;
+    }
+    .user-name {
+      display: flex;
+    }
+    .user-name a {
+      line-height: 20px;
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+    #login-form a {
+      font-size: 12px;
+  }
+  .navbar-toggler-icon {
+    display: inline-block;
+    width: 1em;
+    height: 0.5em;
+    vertical-align: middle;
+    content: "";
+    background: no-repeat center center;
+    background-size: 100% 100%;
+    border-top: 2px solid #ffffff;
+    padding: 2px;
+    border-bottom: 7px double #ffffff;
+}
+.navbar-toggler{
+  height: 1.7em;
+  border: 1px solid #ffffff;
+  margin: 5px 0;
+  padding: 1px 8px;
+}
+
+#register-form .d-flex{
+  flex-direction:row;
+}
+#capnum3{
+  width: 40px;
+margin-left: 15px;
+height: 40px;
+margin-top: 8px;
+}
+
+#register-form a{
+      font-size: 11px;
+margin-top: 10px!important;
+}
+
+
+
+  }
+  

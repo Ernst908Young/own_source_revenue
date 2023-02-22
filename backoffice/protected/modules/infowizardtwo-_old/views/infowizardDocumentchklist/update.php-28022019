@@ -1,0 +1,153 @@
+<style>
+
+</style>
+<div class='portlet box green'>
+<div class='portlet-title'>
+    <div class='caption'>
+        <i style=" font-size:20px;" class='fa fa-list'></i>Update Document Master</div>
+    <div class='tools'>
+	
+	</div>
+	
+</div>
+<div class="portlet-body">
+
+<div class="site-min-height">
+<div class="form form-horizontal" role="form">
+
+
+ <form name="" action="" method="POST">
+
+	<?php 
+	 $data=InfowizardQuestionMasterExt::getListIssuerMapping($model['issmap_id']); 
+	 $dataissuer=InfowizardQuestionMasterExt::getViewIssuer($data['issuer_id']);  $issuer_id=$dataissuer['issuer_id'];
+	$dataissuerby=InfowizardQuestionMasterExt::getViewIssuerby($data['issuerby_id']);  $data=$dataissuerby['issuerby_id'];
+	?>
+	
+	 <div class="row">
+	<div class="form-group col-md-6">
+	<label class="col-lg-4 col-sm-4 control-label" for="application_name" >State/Central<span class="required">* </span></label>
+			<div class="col-md-8">
+			<select name="issuer_id" id="issuer_id" class="form-control" onchange="showUser(this.value)" required>	
+			<?php foreach($Issuerdata as $que){ ?>
+		<option value="<?php echo $que['issuer_id'];?>" <?php if($que['issuer_id']==$dataissuer['issuer_id']) echo "selected"; ?> ><?php echo $que['name'];?></option>
+		<?php }?>
+		</select>	
+		
+	</div></div></div>
+	
+<div class="row">
+	<div class="form-group col-md-6">
+	<label class="col-lg-4 col-sm-4 control-label" for="application_name" >Select Department <span class="required">*</span></label>
+			<div class="col-md-8">
+			<?php if(!empty($model['issmap_id'])) {    ?>
+			
+<select name="issuerby_id" id="issuerby_id" class="form-control"  required  >
+
+<?php  $sql="SELECT m.issmap_id as issmap_id,i.name as name FROM bo_infowizard_issuer_mapping m,bo_infowizard_issuerby_master i WHERE m.issuer_id=$issuer_id and 
+		i.issuerby_id = m.issuerby_id and is_issmap_active='Y'";
+$connection = Yii::app()->db;
+$command = $connection->createCommand($sql);
+$AllIssuerBy = $command->queryAll();
+echo "<option value=''><-----Select-----></option>";
+if (isset($AllIssuerBy)) {
+foreach ($AllIssuerBy as $vs) { ?>
+<option value="<?php echo $vs['issmap_id']; ?>" <?php if($vs['issmap_id']==$data) echo "selected"; ?> ><?php echo $vs['name']; ?></option>
+<?php 
+}
+}
+
+?>
+</select>
+			
+	<?php	} else { ?>
+
+	<select class="form-control"  name="issuerby_id" id="issuerby_id" ></select>
+	<?php  } ?>
+	</div></div></div>
+	
+	
+	<div class="row">
+	<div class="form-group col-md-6">
+	<label class="col-lg-4 col-sm-4 control-label" for="application_name" >Type of Document<span class="required" aria-required="true"> * </span></label>
+	<div class="col-md-8">
+            
+        <?php $options=explode(',',$model['doc_id']); if(count($options)==1){$options[0]=$model['doc_id'];}//print_r($options);?>
+			
+<select name="doc_id[]" id="doc_id" class="form-control" multiple="multiple" required >
+<?php 
+$sql = "select doc_id,name from bo_infowizard_docunenttype_master where is_doc_active='Y'";
+$connection = Yii::app()->db;
+$command = $connection->createCommand($sql);
+$AllDocument = $command->queryAll();
+
+if (isset($AllDocument)) {
+foreach ($AllDocument as $va) {
+?>
+<option value="<?php echo $va['doc_id'];?>"  <?php if(in_array($va['doc_id'],$options)){ echo "selected";} ?>> <?php echo $va['name']; ?></option>
+<?php
+}
+}
+?>
+</select>
+	</div>
+	</div>
+	</div>
+     
+	 
+	 <div class="row">
+	<div class="form-group col-md-6">
+	<label class="col-lg-4 col-sm-4 control-label" for="application_name"> Checklist ID</label>
+	<div class="col-md-8">
+	<input type="text" id="chklist_id" name="chklist_id" value="<?php echo $model['chklist_id']; ?>"  readonly="readonly" class="form-control"/>
+	
+	</div>
+	</div>
+	</div>
+	
+	<div class="row">
+	<div class="form-group col-md-6">
+	<label class="col-lg-4 col-sm-4 control-label" for="application_name" >Checklist Document Name<span class="required" aria-required="true"> * </span></label>
+	<div class="col-md-8">
+	<input type="text" id="name" name="name" value="<?php echo $model['name']; ?>"  class="form-control"/>
+	</div>
+	</div>
+	</div>
+
+		<?php	/*	@Santosh Kumar	@Date - 01-05-2018	@Credit goes to - Kanhan	*/	?>	<div class="row">	<div class="form-group col-md-6">			<label class="col-lg-4 col-sm-4 control-label" for="application_name" >Upload of multiple versions allowed ?<span class="required" aria-required="true"> * </span></label>			<div class="col-md-8">			 <select name="is_multi_version_allowed" id="is_multi_version_allowed" class="form-control"   >		<option value="Y" <?php if($model['is_multi_version_allowed']=='Y') echo "selected"; ?>  >Yes</option>		<option value="N" <?php if($model['is_multi_version_allowed']=='N') echo "selected"; ?> >No</option>		</select>		</div></div>	</div>	<div class="row">	<div class="form-group col-md-6">			<label class="col-lg-4 col-sm-4 control-label" for="application_name" >Validity of document required ?<span class="required" aria-required="true"> * </span></label>			<div class="col-md-8">			 <select name="is_validity_required" id="is_validity_required" class="form-control"   >		<option value="Y" <?php if($model['is_validity_required']=='Y') echo "selected"; ?>  >Yes</option>		<option value="N" <?php if($model['is_validity_required']=='N') echo "selected"; ?> >No</option>		</select>		</div></div>	</div>	<div class="row">	<div class="form-group col-md-6">			<label class="col-lg-4 col-sm-4 control-label" for="application_name" >Reference no. of document required ?<span class="required" aria-required="true"> * </span></label>			<div class="col-md-8">			 <select name="is_document_reference_no_required" id="is_document_reference_no_required" class="form-control"   >		<option value="Y" <?php if($model['is_document_reference_no_required']=='Y') echo "selected"; ?>  >Yes</option>		<option value="N" <?php if($model['is_document_reference_no_required']=='N') echo "selected"; ?>>No</option>		</select>		</div></div>	</div>	<!-- END -->
+	<div class="row">	<div class="form-group col-md-6">			<label class="col-lg-4 col-sm-4 control-label" for="application_name" >Is Active<span class="required" aria-required="true"> * </span></label>			<div class="col-md-8">			 <select name="is_docchklist_active" id="is_docchklist_active" class="form-control"   >		<option value="Y" <?php if($model['is_docchklist_active']=='Y') echo "selected"; ?> >Yes</option>		<option value="N" <?php if($model['is_docchklist_active']=='N') echo "selected"; ?>>No</option>		</select>		</div></div>	</div>
+
+	<div class="row buttons" align="center">
+	<input type="submit" value="Save" class="btn btn-primary" >
+	</div> 
+
+</form>
+
+</div></div></div></div><!-- form -->
+<script>
+function showUser(str) { //alert(str); //alert("<?php echo Yii::app()->request->baseUrl; ?>/infowizard/infowizarddocumentchklist/issuermapping"); 
+$.ajax({
+                type: "POST",
+                url: "<?php echo Yii::app()->request->baseUrl; ?>/infowizard/InfowizardDocumentchklist/issuermappingall",
+				dataType:'json',
+			    data:
+                {
+                post_issuerid: str
+                },
+			   
+               success:  function(data) { //alert(data);
+			   var $select = $('#issuerby_id');
+			   $select.html('');
+                $.each(data, function(index, element) {
+           	
+					$select.append('<option value="' + element.issmap_id + '">' + element.name + '</option>');
+        		});
+				//alert(data);
+				},
+			
+            error:function(jqXHR, textStatus, errorThrown){
+                alert('error::'+errorThrown);
+            }
+            });
+}
+</script>

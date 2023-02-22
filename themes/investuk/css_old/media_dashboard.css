@@ -1,0 +1,105 @@
+@media (min-width:992px) {
+	.invest-dashboard-top-charts .col-md-3, .invest-dashboard-top-charts .col-lg-3{
+		width:20%;
+	}
+}
+@media (max-width:1199px) {
+	
+}
+@media (max-width:991px) {
+	.page-header.navbar{
+		padding-left:0;
+		padding-right:0;
+	}
+	.mid-header-right{
+		width:auto;
+		    right: 29%;
+	}
+	.page-header.navbar .menu-toggler.responsive-toggler{
+		margin-top:0;
+	}
+	.page-header.navbar .menu-toggler>span, .page-header.navbar .menu-toggler>span:after, .page-header.navbar .menu-toggler>span:before{
+		height: 2px;
+		background:#2c2c2c;
+	}
+	.mid-header .logo{
+		    border-bottom: solid 1px #ccc;
+    padding-bottom: 6px;
+	margin-bottom: 12px;
+	}
+	.top-header{
+		display:none;
+	}
+	.page-sidebar .page-sidebar-menu .sidebar-search input, .page-sidebar .page-sidebar-menu > li .sub-menu{
+		background-color:inherit !important;
+	}
+	.page-header.navbar .menu-toggler.responsive-toggler{
+		margin-left:15px;
+	}
+	.user-rel{
+		margin-right: 20px;
+	}
+	.dashboard-welcome h2{
+		font-size: 20px;
+	}
+	.invest-dashboard-top-charts .col-xs-12, .invest-dashboard-top-charts .col-sm-6, .invest-dashboard-top-charts .col-md-3, .invest-dashboard-top-charts .col-lg-3{
+		text-align:center;
+	}
+	.invest-dashboard-top-charts img{
+		display: inline;
+	}
+	.page-content-wrapper .page-content{
+		padding-bottom:0 !important;
+	}
+	.grey-brder-bx-media{
+		margin-bottom:15px;
+	}
+	.top-number-bts{
+		margin-bottom:10px;
+	}
+	.round-stats{
+		display: inline-block;
+    padding-top: 27px;
+	}
+	
+}
+@media (max-width:767px) {
+	.grey-brder-bx-media .grey-brder-bx-btm h2{
+		font-size: 22px;
+	}
+	.grey-brder-bx-media .grey-brder-bx-btm p{
+		font-size: 14px;
+	}
+	.table-top-assets .dt-buttons{
+		    float: left !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+	width: 100%;
+	}
+	.table-top-assets  > div.display-inline-block{
+		float: left !important;
+	}
+}
+@media (max-width:540px) {
+	.page-header.navbar .top-menu{
+		display: inline !important;
+		background-color: inherit !important;
+	}
+}
+@media (max-width:540px) {
+	.page-header.navbar .top-menu .navbar-nav > li.dropdown-user > .dropdown-menu{
+		right: -99px;
+	}
+	.page-header.navbar .top-menu .navbar-nav > li.dropdown .dropdown-menu::before {
+		display:none !important;
+	}
+}
+@media all and (-ms-high-contrast:none){
+	 
+}
+@supports (-ms-ime-align:auto) {
+  
+}
+@supports (-ms-accelerator:true) {
+	
+}

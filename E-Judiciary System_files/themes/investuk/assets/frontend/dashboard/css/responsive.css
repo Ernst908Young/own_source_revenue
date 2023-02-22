@@ -1,0 +1,379 @@
+@media screen and (max-width: 1200px){
+div.user-menu-container .pad-left {padding-left: 54px;}
+}
+
+@media screen and (max-width: 1024px){
+div.user-menu-container .pad-left {padding-left: 54px;}
+}
+
+@media screen and (max-width: 1001px){
+
+}
+
+@media screen and (max-width: 980px){
+#content.nav-fixed {padding-top: 50px;}
+div.user-menu-container .s_res {padding:0 10px;}
+div.user-menu-container .pad-left{padding-left:0px;}
+.pad-lt-20 { padding-left: 0px;}
+.profile-board .tab-content {padding: 0 5px;}
+.prflist1 ul li {width:100%;}
+.matches_count_wrap {font-size:12px; width: 100%;margin:11px 0 0;height: 40px;}
+.similar-pro-div .nopadding-left{padding-left: 14px;}
+
+.jumbotron.header-bg-profile-complete{top:40px;}
+h5.cover-text-lead { font-size: 28px;}
+.profile-complete-header-img{margin-top: 70px;}
+
+.login .wrapper {margin: -260px -200px;}
+
+.carousel-control.right.recomm{right: 28px;}
+.fdi-Carousel .center-block {margin-left: 35px;}
+
+}
+
+@media screen and (max-width: 769px) {
+.user-image {width: 100%; height:auto;}
+#content.nav-fixed {padding-top: 50px;}
+div.user-menu-container .s_res {padding:0 10px;}
+div.user-menu-container .pad-left{padding-left:0px;}
+.pad-lt-20 { padding-left: 0px;}
+.liner{display:none;}
+.profile-board .tab-content {padding: 0 5px;}
+.prflist1 ul li {width:100%;}
+.matches_count_wrap {font-size:12px; width: 100%;margin:11px 0 0;height: 40px;}
+
+.gallery > li {width: 100%;}
+.gallery1 > li {width: 100%;}
+
+/*********************************/
+.jumbotron.header-bg-profile-complete{top:40px;}
+h5.cover-text-lead { font-size: 28px;}
+.profile-complete-header-img{margin-top: 100px;}
+/***************Success Story******/
+
+.login .wrapper {margin: -260px -200px;}
+
+.user-block-footer .card-action-pellet .btn{width:57px;}
+.carousel-control.right.recomm {right:8px !important;}
+.fdi-Carousel .center-block {margin-left:50px;}
+
+}
+
+@media screen and (max-width: 640px) {
+.user-image {width: 100%; height:auto;}
+#content.nav-fixed {padding-top: 50px;}
+div.user-menu-container .s_res {padding:0 10px;}
+div.user-menu-container .pad-left{padding-left:0px;}
+.pad-lt-20 { padding-left: 0px;}
+.liner{display:none;}
+.profile-board .tab-content {padding: 0 5px;}
+.prflist1 ul li {width:100%;}
+.matches_count_wrap {font-size:12px; width: 100%;margin:11px 0 0;height: 40px;}
+
+.gallery > li {width: 100%;}
+.gallery1 > li {width: 100%;}
+
+/*********************************/
+.jumbotron.header-bg-profile-complete{top:40px;}
+h5.cover-text-lead { font-size: 28px;}
+.profile-complete-header-img{margin-top: 31px;}
+/***************Success Story******/
+.success-header-info h1 { font-size: 26px;}
+.success-header-info p { font-size: 15px;}
+
+.login .wrapper {margin: -260px -200px;}
+
+div.user-menu-container .btn-group-vertical {display:inline-block;width:55px;}
+div.user-menu-container .btn-group-vertical>a {text-align: center;}
+
+div.user-menu-container .btn-full .btn-group-vertical {display:inline-block;width:100%;top: 10px;}
+div.user-menu-container .btn-full .btn-group-vertical>a {text-align: left;}
+
+.user-block-footer .card-action-pellet .btn{width:64px;}
+.carousel-control.right.recomm {right: 0px !important;}
+
+.c100 {font-size:110px;}
+
+.filter-side .brand {font-size: 15px !important;line-height: 26px !important;}
+}
+
+@media screen and (max-width: 540px) {
+.user-image {width: 100%; height:auto;}
+#content.nav-fixed {padding-top: 50px;}
+div.user-menu-container .s_res {padding:0 10px;}
+div.user-menu-container .pad-left{padding-left:0px;}
+.pad-lt-20 { padding-left: 0px;}
+.liner{display:none;}
+.profile-board .tab-content {padding: 0 5px;}
+.prflist1 ul li {width:100%;}
+.matches_count_wrap {font-size:12px; width: 100%;margin:11px 0 0;height: 40px;}
+
+.gallery > li {width: 100%;}
+.gallery1 > li {width: 100%;}
+
+/*********************************/
+.jumbotron.header-bg-profile-complete{top:40px;}
+h5.cover-text-lead { font-size: 28px;}
+.profile-complete-header-img{margin-top: 70px;}
+/***************Success Story******/
+.success-header-info h1 { font-size: 26px;}
+.success-header-info p { font-size: 15px;}
+
+.login .wrapper {margin: -260px -200px;}
+
+.vivah-about-feature {width:45%;border-right:none;}
+.chat-user-list .brand{padding:0 0px; line-height:20px !important; margin-top:32px;}
+.user-list.user-chat-side li a{padding:0;}
+
+div.user-menu-container .btn-group-vertical {display:inline-block;width:55px;}
+div.user-menu-container .btn-group-vertical>a {text-align: center;}
+
+div.user-menu-container .btn-full .btn-group-vertical {display:inline-block;width:100%;top: 10px;}
+div.user-menu-container .btn-full .btn-group-vertical>a {text-align: left;}
+
+#sidebar-wrapper {right:0 !important;}
+#wrapper.toggled #sidebar-wrapper {width: 100% !important;top: 44px;}
+.v-chat-content .user-list{display:block !important;}
+.popup-box.chat-window {right: 15px; z-index: 9999;}
+
+.user-block-footer .card-action-pellet .btn{width:64px;}
+.carousel-control.right.recomm {right: 0px !important;}
+.c100 {font-size:100px;}
+.card.hovercard .bottom {padding: 0 2px;}
+
+.filter-side .brand {font-size: 15px !important;line-height: 26px !important;}
+.filter-side .box .box-content {padding: 20px 0px 0 0px !important;}
+.filter-side .box .box-content .col-md-12{padding: 0;}
+.inline{font-size: 11px;}
+.box .box-title h3 i { margin: 0 2px 0 5px;}
+#main .box .box-title h3 { font-size: 14px !important;}
+}
+
+@media screen and (max-width: 500px) {
+.user-image {width: 100%; height:auto;}
+#content.nav-fixed {padding-top: 50px;}
+div.user-menu-container .s_res {padding:0 10px;}
+div.user-menu-container .pad-left{padding-left:0px;}
+.pad-lt-20 { padding-left: 0px;}
+.liner{display:none;}
+.profile-board .tab-content {padding: 0 5px;}
+.prflist1 ul li {width:100%;}
+.matches_count_wrap {font-size:12px; width: 100%;margin:11px 0 0;height: 40px;}
+
+.gallery > li {width: 100%;}
+.gallery1 > li {width: 100%;}
+
+/*********************************/
+.jumbotron.header-bg-profile-complete{top:40px;}
+h5.cover-text-lead { font-size: 28px;}
+.profile-complete-header-img{margin-top: 70px;}
+/***************Success Story******/
+.success-header-info h1 { font-size: 26px;}
+.success-header-info p { font-size: 15px;}
+
+.login .wrapper {margin: -260px -200px;}
+
+.vivah-about-feature {width: 97%;border-right:none;}
+.chat-user-list .brand{padding:0 0px; line-height:20px !important; margin-top:32px;}
+.user-list.user-chat-side li a{padding:0;}
+
+div.user-menu-container .btn-group-vertical {display:inline-block;width:55px;}
+div.user-menu-container .btn-group-vertical>a {text-align: center;}
+
+div.user-menu-container .btn-full .btn-group-vertical {display:inline-block;width:100%;top: 10px;}
+div.user-menu-container .btn-full .btn-group-vertical>a {text-align: left;}
+
+#sidebar-wrapper {right:0 !important;}
+#wrapper.toggled #sidebar-wrapper {width: 100% !important;top: 44px;}
+.v-chat-content .user-list{display:block !important;}
+.popup-box.chat-window {right: 15px; z-index: 9999;}
+
+.user-block-footer .card-action-pellet .btn{width:64px;}
+.carousel-control.right.recomm {right: 0px !important;}
+.c100 {font-size: 100px;}
+.card.hovercard .bottom {padding: 0 2px;}
+
+.filter-side .brand {font-size: 15px !important;line-height: 26px !important;}
+.filter-side .box .box-content {padding: 20px 0px 0 0px !important;}
+.filter-side .box .box-content .col-md-12{padding: 0;}
+.inline{font-size: 11px;}
+.box .box-title h3 i { margin: 0 2px 0 5px;}
+#main .box .box-title h3 { font-size: 14px !important;}
+
+.bg-01 h2 {font-size: 34px;}
+}
+
+@media screen and (max-width: 480px) {
+.user-image {width: 100%; height:auto;}
+#content.nav-fixed {padding-top: 50px;}
+div.user-menu-container .s_res {padding:0 10px;}
+div.user-menu-container .pad-left{padding-left:0px;}
+.pad-lt-20 { padding-left: 0px;}
+.liner{display:none;}
+.profile-board .tab-content {padding: 0 5px;}
+.prflist1 ul li {width:100%;}
+.matches_count_wrap {font-size:12px; width: 100%;margin:11px 0 0;height: 40px;}
+
+.gallery > li {width: 100%;}
+.gallery1 > li {width: 100%;}
+
+/*********************************/
+.jumbotron.header-bg-profile-complete{top:40px;}
+h5.cover-text-lead { font-size: 28px;}
+.profile-complete-header-img{margin-top: 55px;}
+/***************Success Story******/
+.success-header-info h1 { font-size: 26px;}
+.success-header-info p { font-size: 15px;}
+
+.vivah-about-feature {width: 97%;border-right:none;}
+
+.upgr-tab.msg_tab .nav-tabs > li > a {padding: 14px 14px;}
+.chat-user-list .brand{padding:0 0px; line-height:20px !important; margin-top:32px;}
+.user-list.user-chat-side li a{padding:0;}
+
+div.user-menu-container .btn-group-vertical {display:inline-block;width:55px;}
+div.user-menu-container .btn-group-vertical>a {text-align: center;}
+
+div.user-menu-container .btn-full .btn-group-vertical {display:inline-block;width:100%;top: 10px;}
+div.user-menu-container .btn-full .btn-group-vertical>a {text-align: left;}
+
+#sidebar-wrapper {right:0 !important;}
+#wrapper.toggled #sidebar-wrapper {width: 100% !important;top: 44px;}
+.v-chat-content .user-list{display:block !important;}
+.popup-box.chat-window {right: 15px; z-index: 9999;}
+
+.user-block-footer .card-action-pellet .btn{width:64px;}
+
+.carousel-control.right.recomm {right: 0px !important;}
+.c100 {font-size: 98px;}
+.card.hovercard .bottom {padding: 0 2px;}
+
+.filter-side .brand {font-size: 15px !important;line-height: 26px !important;}
+.filter-side .box .box-content {padding: 20px 0px 0 0px !important;}
+.filter-side .box .box-content .col-md-12{padding: 0;}
+.inline{font-size: 11px;}
+.box .box-title h3 i { margin: 0 2px 0 5px;}
+#main .box .box-title h3 { font-size: 14px !important;}
+
+.jumbotron.header-bg-service{padding:0;margin:42px 0 0;height: 54px;}
+.bg-01 h2 {font-size: 34px;}
+}
+
+@media screen and (max-width: 360px) {
+ .user-image {width: 100%; height:auto;}
+#content.nav-fixed {padding-top: 50px;}
+div.user-menu-container .s_res {padding:0 10px;}
+div.user-menu-container .pad-left{padding-left:0px;}
+.pad-lt-20 { padding-left: 0px;}
+.liner{display:none;}
+.profile-board .tab-content {padding: 0 5px;}
+.prflist1 ul li {width:100%;}
+.matches_count_wrap {font-size:12px; width: 100%;margin:11px 0 0;height: 40px;}
+
+.gallery > li {width: 100%;}
+.gallery1 > li {width: 100%;}
+
+/*********************************/
+.jumbotron.header-bg-profile-complete{top:40px;}
+h5.cover-text-lead { font-size: 28px;}
+.profile-complete-header-img{margin-top: 31px;}
+/***************Success Story******/
+.success-header-info h1 { font-size: 26px;}
+.success-header-info p { font-size: 15px;}
+
+.vivah-about-feature {width: 97%;border-right:none;}
+
+.upgr-tab.msg_tab .nav-tabs > li > a {padding: 14px 11px;}
+.chat-user-list .brand{padding:0 0px; line-height:20px !important; margin-top:32px;}
+.user-list.user-chat-side li a{padding:0;}
+
+div.user-menu-container .btn-group-vertical {display:inline-block;width:55px;}
+div.user-menu-container .btn-group-vertical>a {text-align: center;}
+
+div.user-menu-container .btn-full .btn-group-vertical {display:inline-block;width:100%;top: 10px;}
+div.user-menu-container .btn-full .btn-group-vertical>a {text-align: left;}
+
+#sidebar-wrapper {right:0 !important;}
+#wrapper.toggled #sidebar-wrapper {width: 100% !important;top: 44px;}
+.v-chat-content .user-list{display:block !important;}
+.popup-box.chat-window {right: 15px; z-index: 9999;}
+
+.user-block-footer .card-action-pellet .btn{width:64px;}
+
+.carousel-control.right.recomm {right: 0px !important;}
+.c100 {font-size: 98px;}
+.card.hovercard .bottom {padding: 0 2px;}
+
+.filter-side .brand {font-size: 15px !important;line-height: 26px !important;}
+.filter-side .box .box-content {padding: 20px 0px 0 0px !important;}
+.filter-side .box .box-content .col-md-12{padding: 0;}
+.inline{font-size: 11px;}
+.box .box-title h3 i { margin: 0 2px 0 5px;}
+#main .box .box-title h3 { font-size: 14px !important;}
+
+
+.jumbotron.header-bg-service{padding:0;margin:42px 0 0;height: 54px;}
+.bg-01 h2 {font-size: 34px;}
+
+}
+
+@media screen and (max-width: 320px) {
+.user-image {width: 100%; height:auto;}
+#content.nav-fixed {padding-top: 50px;}
+div.user-menu-container .s_res {padding:0 10px;}
+div.user-menu-container .pad-left{padding-left:0px;}
+.pad-lt-20 { padding-left: 0px;}
+.liner{display:none;}
+.profile-board .tab-content {padding: 0 5px;}
+.prflist1 ul li {width:100%;}
+.matches_count_wrap {font-size:12px; width: 100%;margin:11px 0 0;height: 40px;}
+
+.gallery > li {width: 100%;}
+.gallery1 > li {width: 100%;}
+
+/*********************************/
+.jumbotron.header-bg-profile-complete{top:40px;}
+h5.cover-text-lead { font-size: 28px;}
+.profile-complete-header-img{margin-top: 31px;}
+
+/***************Success Story******/
+.success-header-info h1 { font-size: 26px;}
+.success-header-info p { font-size: 15px;}
+
+.vivah-about-feature {width: 97%;border-right:none;}
+
+.upgr-tab.msg_tab .nav-tabs > li > a {padding: 14px 6px !important;}
+.chat-user-list .brand{padding:0 0px; line-height:20px !important; margin-top:32px;}
+.page-header.chat_his_side{margin:0}
+.user-list.user-chat-side li a{padding:0;}
+
+div.user-menu-container .btn-group-vertical {display:inline-block;width:55px;}
+div.user-menu-container .btn-group-vertical>a {text-align: center;}
+
+div.user-menu-container .btn-full .btn-group-vertical {display:inline-block;width:100%;top: 10px;}
+div.user-menu-container .btn-full .btn-group-vertical>a {text-align: left;}
+
+#sidebar-wrapper {right:0 !important;}
+#wrapper.toggled #sidebar-wrapper {width: 100% !important;top: 44px;}
+.v-chat-content .user-list{display:block !important;}
+.popup-box.chat-window {right: 15px; z-index: 9999;}
+
+.user-block-footer .card-action-pellet .btn{width:64px;}
+.carousel-control.right.recomm {right: 0px;}
+.fdi-Carousel .center-block {margin-right: 0;margin-left: 0px;}
+
+.c100 {font-size: 98px;}
+.card.hovercard .bottom {padding: 0 2px;}
+.col-xs-6 .col-sm-3.sidebar-offcanvas{padding-right:0px;padding-left:0px;}
+
+.filter-side .brand {font-size: 15px !important;line-height: 26px !important;}
+.filter-side .box .box-content {padding: 20px 0px 0 0px !important;}
+.filter-side .box .box-content .col-md-12{padding: 0;}
+.inline{font-size: 11px;}
+.box .box-title h3 i { margin: 0 2px 0 5px;}
+#main .box .box-title h3 { font-size: 14px !important;}
+
+.jumbotron.header-bg-service{padding:0;margin:42px 0 0;height: 54px;}
+.bg-01 h2 {font-size: 34px;}
+}
+

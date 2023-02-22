@@ -1,0 +1,27 @@
+Options -Indexes
+RewriteEngine On
+#RewriteCond %{HTTPS} off
+#RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L]
+RewriteCond %{REQUEST_FILENAME} !-f  
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteRule . index.php
+
+ErrorDocument 400 /customerror
+ErrorDocument 403 /customerror
+ErrorDocument 404 /customerror
+ErrorDocument 500 /customerror
+
+Header always append X-Frame-Options: SAMEORIGIN
+Header always append X-Content-Type-Options: nosniff
+Header always append X-Frame-Options deny
+Header always append X-XSS-Protection 1
+Header always append X-XSS-Protection mode=block
+Header always append Strict-Transport-Security 1
+#Header always append "Web Server" "Google Web Server 4.5"
+Header always append "OS" "Windows 10 Server"
+Header always append "Firewall" "Sonicwall"
+
+Header always append "Set-Cookie" "__utma=fsafasfasfas4634;HTTPOnly;Secure"
+Header always append "Set-Cookie" "__secret_key=2184072842618162561209;HTTPOnly;Secure"
+Header edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
+

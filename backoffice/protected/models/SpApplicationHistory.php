@@ -1,0 +1,144 @@
+<?php
+
+/**
+ * This is the model class for table "bo_sp_application_history".
+ *
+ * The followings are the available columns in table 'bo_sp_application_history':
+ * @property integer $history_id
+ * @property integer $sp_app_id
+ * @property integer $service_id
+ * @property string $sp_tag
+ * @property string $app_id
+ * @property string $application_status
+ * @property string $comments
+ * @property string $approver_id
+ * @property string $next_approver
+ * @property string $added_date_time
+ * @property string $sent_dated_time
+ * @property string $param_1
+ * @property string $param_2
+ * @property string $param_3
+ * @property string $param_4
+ * @property string $param_5
+ *
+ * The followings are the available model relations:
+ * @property SpApplications $spApp
+ */
+class SpApplicationHistory extends CActiveRecord
+{
+	/**
+	 * @return string the associated database table name
+	 */
+	public function tableName()
+	{
+		return 'bo_sp_application_history';
+	}
+
+	/**
+	 * @return array validation rules for model attributes.
+	 */
+	public function rules()
+	{
+		// NOTE: you should only define rules for those attributes that
+		// will receive user inputs.
+		return array(
+			array('sp_tag, app_id, application_status, added_date_time', 'required'),
+			array('sp_app_id, service_id', 'numerical', 'integerOnly'=>true),
+			array('sp_tag, app_id', 'length', 'max'=>250),
+			array('application_status, approver_id, next_approver', 'length', 'max'=>200),
+			array('param_1, param_2, param_3, param_4, param_5', 'length', 'max'=>255),
+			array('comments, sent_dated_time, role_id, role_name, role_user_info, next_role_id, remote_server, user_agent, approver_details', 'safe'),
+			// The following rule is used by search().
+			// @todo Please remove those attributes that should not be searched.
+			array('history_id, sp_app_id, service_id, sp_tag, app_id, application_status, comments, approver_id, next_approver, added_date_time, sent_dated_time, param_1, param_2, param_3, param_4, param_5, role_id, role_name, role_user_info, next_role_id, remote_server, user_agent, approver_details', 'safe', 'on'=>'search'),
+		);
+	}
+
+	/**
+	 * @return array relational rules.
+	 */
+	public function relations()
+	{
+		// NOTE: you may need to adjust the relation name and the related
+		// class name for the relations automatically generated below.
+		return array(
+			'spApp' => array(self::BELONGS_TO, 'SpApplications', 'sp_app_id'),
+		);
+	}
+
+	/**
+	 * @return array customized attribute labels (name=>label)
+	 */
+	public function attributeLabels()
+	{
+		return array(
+			'history_id' => 'History',
+			'sp_app_id' => 'Sp App',
+			'service_id' => 'Service',
+			'sp_tag' => 'Sp Tag',
+			'app_id' => 'App',
+			'application_status' => 'Application Status',
+			'comments' => 'Comments',
+			'approver_id' => 'Approver',
+			'next_approver' => 'Next Approver',
+			'added_date_time' => 'Added Date Time',
+			'sent_dated_time' => 'Sent Dated Time',
+			'param_1' => 'Param 1',
+			'param_2' => 'Param 2',
+			'param_3' => 'Param 3',
+			'param_4' => 'Param 4',
+			'param_5' => 'Param 5',
+		);
+	}
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
+	 */
+	public function search()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('history_id',$this->history_id);
+		$criteria->compare('sp_app_id',$this->sp_app_id);
+		$criteria->compare('service_id',$this->service_id);
+		$criteria->compare('sp_tag',$this->sp_tag,true);
+		$criteria->compare('app_id',$this->app_id,true);
+		$criteria->compare('application_status',$this->application_status,true);
+		$criteria->compare('comments',$this->comments,true);
+		$criteria->compare('approver_id',$this->approver_id,true);
+		$criteria->compare('next_approver',$this->next_approver,true);
+		$criteria->compare('added_date_time',$this->added_date_time,true);
+		$criteria->compare('sent_dated_time',$this->sent_dated_time,true);
+		$criteria->compare('param_1',$this->param_1,true);
+		$criteria->compare('param_2',$this->param_2,true);
+		$criteria->compare('param_3',$this->param_3,true);
+		$criteria->compare('param_4',$this->param_4,true);
+		$criteria->compare('param_5',$this->param_5,true);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return SpApplicationHistory the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
+	}
+}
